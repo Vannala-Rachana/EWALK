@@ -4,102 +4,90 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Elephant Walk - Order Now</title>
+    <title>Elephant Walk – Order Now</title>
     <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml" />
     <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
       html, body {
         height: 100%;
-        background: #070707;
-        font-family: "DM Sans", sans-serif;
         overflow: hidden;
+        background: #0a0a0a;
+        font-family: "DM Sans", Arial, sans-serif;
       }
 
-      .chownow-topbar {
+      /* ── Top bar ── */
+      .topbar {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        height: 48px;
+        background: #111;
+        border-bottom: 1px solid rgba(201, 168, 76, 0.3);
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 10px 16px;
-        background: #111;
-        border-bottom: 1px solid rgba(201,168,76,0.25);
-        height: 50px;
+        padding: 0 16px;
+        z-index: 10;
       }
 
-      .chownow-topbar .back-btn {
+      .back-btn {
         display: inline-flex;
         align-items: center;
         gap: 6px;
         color: #c9a84c;
-        text-decoration: none;
         font-size: 1.4rem;
         font-weight: 700;
-        letter-spacing: 0.5px;
+        text-decoration: none;
+        letter-spacing: 0.3px;
       }
 
-      .chownow-topbar .back-btn:hover {
-        color: #e0ba5c;
-      }
-
-      .chownow-topbar .title {
-        font-size: 1.5rem;
-        color: #fff;
+      .topbar-title {
+        font-size: 1.4rem;
         font-weight: 700;
-        letter-spacing: 1px;
+        color: #fff;
+        letter-spacing: 1.5px;
         text-transform: uppercase;
       }
 
-      .chownow-frame {
+      /* ── iframe ── */
+      .order-frame {
+        position: fixed;
+        top: 48px;
+        left: 0;
+        right: 0;
+        bottom: 0;
         width: 100%;
-        height: calc(100vh - 50px);
+        height: calc(100% - 48px);
         border: none;
-        display: block;
+        background: #fff;
       }
     </style>
   </head>
   <body>
-    <div class="chownow-topbar">
-      <a href="javascript:history.back()" class="back-btn">&#8592; Back</a>
-      <span class="title">Order Online</span>
+
+    <div class="topbar">
+      <a class="back-btn" href="javascript:history.back()">&#8592; Back</a>
+      <span class="topbar-title">Order Online</span>
       <span style="width:60px"></span>
     </div>
 
+    <!--
+      sandbox notes:
+      - allow-same-origin + allow-scripts  → ChowNow JS runs normally
+      - allow-forms                         → payment / checkout forms work
+      - allow-top-navigation-by-user-activation → "Start Order" click navigates
+                                                   THIS tab instead of opening a new one
+      - NO allow-popups                     → blocks window.open / target=_blank
+    -->
     <iframe
-      class="chownow-frame"
+      class="order-frame"
       src="https://order.chownow.com/order/4290/locations"
       title="ChowNow Online Ordering"
-      allow="fullscreen; payment; geolocation; camera; microphone"
+      sandbox="allow-same-origin allow-scripts allow-forms allow-top-navigation-by-user-activation"
+      allow="payment; fullscreen; geolocation"
       allowpaymentrequest
       allowfullscreen
-      referrerpolicy="no-referrer-when-downgrade"
     ></iframe>
 
-    <script>
-      // If ChowNow tries to open a new tab or navigate window.top,
-      // intercept and redirect the current page instead
-      var iframe = document.querySelector('.chownow-frame');
-      iframe.addEventListener('load', function () {
-        try {
-          var iframeWin = iframe.contentWindow;
-          var origOpen = iframeWin.open;
-          iframeWin.open = function (url) {
-            if (url) window.location.href = url;
-            return null;
-          };
-        } catch (e) {
-          // Cross-origin restriction — fallback: listen for message events
-        }
-      });
-
-      // Listen for postMessage from ChowNow to detect redirect requests
-      window.addEventListener('message', function (e) {
-        if (e.data && typeof e.data === 'string' && e.data.startsWith('http')) {
-          window.location.href = e.data;
-        }
-        if (e.data && e.data.url) {
-          window.location.href = e.data.url;
-        }
-      });
-    </script>
   </body>
 </html>

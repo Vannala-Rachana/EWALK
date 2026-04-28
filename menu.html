@@ -1,0 +1,4023 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu - Elephant Walk</title>
+    <meta name="title" content="Menu - Elephant Walk Indian Bar and Grill" />
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+
+    <style>
+      .header {
+        top: 0px !important;
+        z-index: 1200 !important;
+        background-color: var(--eerie-black-4, #1a1a1a) !important;
+      }
+
+      .topbar {
+        z-index: 1201 !important;
+      }
+
+      html,
+      body {
+        scroll-behavior: smooth;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        height: auto !important;
+      }
+
+      /* ── Hero ───────────────────────────────────────── */
+      .menu-page-hero {
+        display: none;
+      }
+
+      /* ── Spacer ─────────────────────────────────────── */
+      .menu-fixed-spacer {
+        height: -10px;
+      }
+
+      /* ── Tabs (Fixed) ───────────────────────────────── */
+      .menu-tabs-wrapper {
+        position: fixed;
+        left: 0;
+        right: 0;
+        z-index: 1180;
+        background-color: #111111;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        padding: 10px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+      }
+
+      .menu-tab-btn {
+        padding: 10px 36px;
+        font-size: 1.4rem;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        border: 2px solid rgba(201, 168, 76, 0.5);
+        border-radius: 999px;
+        background: transparent;
+        color: #aaa;
+        cursor: pointer;
+        transition: all 0.25s ease;
+      }
+
+      .menu-tab-btn:hover {
+        border-color: #c9a84c;
+        color: #c9a84c;
+        background-color: rgba(201, 168, 76, 0.08);
+      }
+
+      .menu-tab-btn.active {
+        background-color: #c9a84c;
+        border-color: #c9a84c;
+        color: #111;
+        box-shadow: 0 4px 20px rgba(201, 168, 76, 0.35);
+      }
+
+      /* ── Category Nav ───────────────────────────────── */
+      .menu-cat-nav {
+        display: none;
+        position: fixed;
+        left: 0;
+        right: 0;
+        z-index: 1179;
+        background-color: #1a1a1a;
+        border-bottom: 2px solid rgba(201, 168, 76, 0.3);
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.9);
+      }
+
+      .menu-cat-nav.is-active {
+        display: block;
+      }
+
+      .menu-cat-nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .menu-cat-nav ul {
+        display: flex;
+        list-style: none;
+        padding: 0 16px;
+        margin: 0 auto;
+        flex-wrap: nowrap;
+        min-width: max-content;
+        justify-content: center;
+      }
+
+      .menu-cat-nav ul li a {
+        display: block;
+        padding: 10px 14px;
+        color: #aaa;
+        font-size: 1.15rem;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-decoration: none;
+        white-space: nowrap;
+        border-bottom: 3px solid transparent;
+        transition: 0.2s;
+      }
+
+      .menu-cat-nav ul li a:hover,
+      .menu-cat-nav ul li a.active {
+        color: #c9a84c;
+        border-bottom: 3px solid #c9a84c;
+        background-color: rgba(201, 168, 76, 0.1);
+      }
+
+      /* ── NAVBAR FUNCTIONALITY (ADDED) ───────────────── */
+      .navbar .logo.drawer-logo img {
+        width: 150px;
+        height: auto;
+        object-fit: contain;
+      }
+
+      .navbar-list .navbar-heading .navbar-link {
+        cursor: default;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .navbar-list > .navbar-item:not(.navbar-subitem) .navbar-link {
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .navbar-list > .navbar-item:not(.navbar-subitem) .navbar-link::before {
+        content: "◇";
+        color: #c9a84c;
+        margin-right: 10px;
+        display: inline-block;
+      }
+
+      .navbar-list .navbar-subitem .navbar-link .span {
+        padding-left: 16px;
+        display: inline-block;
+      }
+
+      .navbar-list .navbar-subitem .separator {
+        display: none;
+      }
+
+      .navbar-heading.active .navbar-link {
+        color: #c9a84c;
+        font-weight: 700;
+      }
+
+      /* ── Hide fixed bars when drawer open ───────────── */
+      body.nav-active .menu-tabs-wrapper,
+      body.nav-active .menu-cat-nav {
+        display: none !important;
+      }
+
+      body.nav-active .navbar .drawer-logo {
+        display: none !important;
+      }
+
+      /* ── Menu Content ───────────────────────────────── */
+      .menu-page-content {
+        background-color: var(--eerie-black-1, #111);
+        padding-top: 110px;
+        padding-bottom: 100px;
+      }
+
+      .menu-panel {
+        display: none;
+        padding-top: 18px;
+      }
+
+      .menu-panel.is-active {
+        display: block;
+      }
+
+      .menu-panel[hidden] {
+        display: none !important;
+      }
+
+      /* ── Sections ───────────────────────────────────── */
+      .menu-section {
+        margin-bottom: 80px;
+      }
+
+      .menu-section-title {
+        font-family: var(--fontFamily-forum, "Forum", serif);
+        font-size: 3.8rem;
+        color: #c9a84c;
+        text-align: center;
+        margin-bottom: 12px;
+      }
+
+      .menu-section-divider {
+        width: 60px;
+        height: 2px;
+        background: #c9a84c;
+        margin: 0 auto 40px;
+        border: none;
+      }
+
+      /* ── Grid ───────────────────────────────────────── */
+      .menu-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px 30px;
+      }
+
+      /* ── Cards ─────────────────────────────────────── */
+      .menu-card {
+        display: flex;
+        gap: 16px;
+        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 16px;
+        background-color: rgba(255, 255, 255, 0.02);
+        transition: 0.25s;
+      }
+
+      .menu-card:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-color: rgba(201, 168, 76, 0.3);
+      }
+
+      .menu-thumb-placeholder {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        border: 2px dashed #c9a84c;
+        overflow: hidden;
+      }
+
+      .menu-thumb-placeholder img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .menu-card-content {
+        flex: 1;
+      }
+
+      .menu-card .title-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .menu-card .card-title {
+        color: #fff;
+        font-size: 1.7rem;
+        font-weight: 700;
+      }
+
+      .menu-card .price {
+        margin-left: auto;
+        color: #c9a84c;
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+
+      .menu-card .card-desc {
+        color: #999;
+        font-size: 1.35rem;
+      }
+
+      /* ── Responsive ─────────────────────────────────── */
+      @media (max-width: 768px) {
+        .menu-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .menu-tabs-wrapper {
+          display: none;
+        }
+
+        .menu-card {
+          padding: 16px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .navbar .logo.drawer-logo img {
+          width: 128px;
+        }
+      }
+
+      /* ── Desktop cleanup (important) ───────────────── */
+      @media (min-width: 769px) {
+        .navbar-list .navbar-heading,
+        .navbar-list .navbar-subitem {
+          display: none !important;
+        }
+
+        .navbar-list > .navbar-item:not(.navbar-subitem) .navbar-link::before {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body id="top">
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="container">
+        <address class="topbar-item">
+          <div class="icon">
+            <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
+          </div>
+          <span class="span">170 W McMillan St Cincinnati, OH 45219</span>
+        </address>
+        <div class="separator"></div>
+        <div class="topbar-item item-2">
+          <div class="icon">
+            <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+          </div>
+          <span class="span">Mon-Fri : 9.00 am to 11.00 pm</span>
+          <span class="span">Sat-Sun : 9.00 am to 2.30 am</span>
+        </div>
+        <a href="tel:+15135261555" class="topbar-item link">
+          <div class="icon">
+            <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
+          </div>
+          <span class="span">(513) 526-1555</span>
+        </a>
+        <div class="separator"></div>
+        <a href="mailto:booking@restaurant.com" class="topbar-item link">
+          <div class="icon">
+            <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
+          </div>
+          <span class="span">booking@restaurant.com</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header" data-header>
+      <div class="container">
+        <a href="./index.html" class="logo">
+          <img
+            src="assets/images/logo.png"
+            width="220"
+            height="70"
+            alt="Elephant Walk - Home"
+            onerror="
+              if (this.dataset.fallback === '1') {
+                this.dataset.fallback = '2';
+                this.src = 'assets/images/logo.png';
+              } else if (this.dataset.fallback === '2') {
+                this.dataset.fallback = '3';
+                this.src = 'assets/images/logo.png';
+              } else {
+                this.onerror = null;
+              }
+            "
+            data-fallback="1"
+          />
+        </a>
+        <nav class="navbar" data-navbar>
+          <button class="close-btn" aria-label="close menu">
+            <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+          </button>
+          <ul class="navbar-list">
+            <li class="navbar-item">
+              <a href="./index.html#home" class="navbar-link hover-underline">
+                <div class="separator"></div>
+                <span class="span">Home</span>
+              </a>
+            </li>
+            <li class="navbar-item desktop-menu-link">
+              <a href="./menu.html" class="navbar-link hover-underline active">
+                <div class="separator"></div>
+                <span class="span">Menu</span>
+              </a>
+
+              <ul class="navbar-submenu">
+                <li class="navbar-item navbar-subitem">
+                  <a
+                    href="#"
+                    class="navbar-link hover-underline"
+                    data-tab="food"
+                    data-nav-toggler
+                  >
+                    <span class="span">Indian Food</span>
+                  </a>
+                </li>
+
+                <li class="navbar-item navbar-subitem">
+                  <a
+                    href="#"
+                    class="navbar-link hover-underline"
+                    data-tab="ethiopian"
+                    data-nav-toggler
+                  >
+                    <span class="span">Ethiopian Food</span>
+                  </a>
+                </li>
+
+                <li class="navbar-item navbar-subitem">
+                  <a
+                    href="#"
+                    class="navbar-link hover-underline"
+                    data-tab="brunch"
+                    data-nav-toggler
+                  >
+                    <span class="span">Brunch</span>
+                  </a>
+                </li>
+
+                <li class="navbar-item navbar-subitem">
+                  <a
+                    href="#"
+                    class="navbar-link hover-underline"
+                    data-tab="bar"
+                    data-nav-toggler
+                  >
+                    <span class="span">Bar Menu</span>
+                  </a>
+                </li>
+
+                <li class="navbar-item navbar-subitem">
+                  <a
+                    href="#"
+                    class="navbar-link hover-underline"
+                    data-tab="drinks"
+                    data-nav-toggler
+                  >
+                    <span class="span">Drinks</span>
+                  </a>
+                </li>
+
+                <li class="navbar-item navbar-subitem">
+                  <a
+                    href="#"
+                    class="navbar-link hover-underline"
+                    data-tab="desserts"
+                    data-nav-toggler
+                  >
+                    <span class="span">Desserts</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="navbar-item">
+              <a href="./index.html#about" class="navbar-link hover-underline">
+                <div class="separator"></div>
+                <span class="span">About Us</span>
+              </a>
+            </li>
+            <li class="navbar-item">
+              <a
+                href="./index.html#reservation"
+                class="navbar-link hover-underline"
+              >
+                <div class="separator"></div>
+                <span class="span">Contact</span>
+              </a>
+            </li>
+          </ul>
+          <div class="text-center">
+            <p class="headline-1 navbar-title">Visit Us</p>
+            <address class="body-4">
+              170 W McMillan St<br />Cincinnati, OH 45219
+            </address>
+            <p class="body-4 navbar-text">Open: 9.00 am - 2.30 am</p>
+            <a href="mailto:booking@restaurant.com" class="body-4 sidebar-link"
+              >booking@restaurant.com</a
+            >
+            <div class="separator"></div>
+            <p class="contact-label">Booking Request</p>
+            <a
+              href="tel:+15135261555"
+              class="body-1 contact-number hover-underline"
+              >(513) 526-1555</a
+            >
+          </div>
+        </nav>
+        <a href="./chownow.html" class="btn btn-secondary">
+          <span class="text text-1">ORDER NOW</span>
+          <span class="text text-2" aria-hidden="true">ORDER NOW</span>
+        </a>
+        <button class="nav-open-btn" aria-label="open menu">
+          <span class="line line-1"></span>
+          <span class="line line-2"></span>
+          <span class="line line-3"></span>
+        </button>
+        <div class="overlay" data-overlay></div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <div class="menu-page-hero"><br /><br /></div>
+    <!-- FIXED TABS -->
+    <div class="menu-tabs-wrapper" id="menu-tabs-anchor">
+      <button class="menu-tab-btn active" data-tab="food">
+        🇮🇳 Indian Food
+      </button>
+      <button class="menu-tab-btn" data-tab="ethiopian">
+        🇮🇪 Ethiopian Food
+      </button>
+      <button class="menu-tab-btn" data-tab="brunch">
+        🧇 Brunch Specialities
+      </button>
+      <button class="menu-tab-btn" data-tab="bar">🍹 Bar Menu</button>
+      <button class="menu-tab-btn" data-tab="drinks">☕ Drinks</button>
+      <button class="menu-tab-btn" data-tab="desserts">🍰 Desserts</button>
+    </div>
+
+    <!-- FIXED CATEGORY NAV — FOOD -->
+    <nav
+      class="menu-cat-nav is-active"
+      id="cat-nav-food"
+      aria-label="food menu categories"
+    >
+      <ul>
+        <li><a href="#appetizers" class="active">Appetizers</a></li>
+        <li><a href="#salads">Salads</a></li>
+        <li><a href="#house-made-soups">House Made Soups</a></li>
+        <li><a href="#masalas-curries">Masalas &amp; Curries</a></li>
+        <li><a href="#tandoori">Tandoori</a></li>
+        <li><a href="#biryani">Biryani</a></li>
+        <li><a href="#Lunch Specials">Lunch Specials</a></li>
+        <li><a href="#modern-indian">Modern Indian</a></li>
+        <li><a href="#indian-breads">Indian Breads</a></li>
+        <li><a href="#indian-sides">Indian Sides</a></li>
+      </ul>
+    </nav>
+
+    <!-- FIXED CATEGORY NAV — BRUNCH -->
+    <nav
+      class="menu-cat-nav"
+      id="cat-nav-brunch"
+      aria-label="brunch menu categories"
+    >
+      <ul>
+        <li><a href="#br-main-event" class="active">The Main Event</a></li>
+        <li><a href="#br-sweet-stuff">The Sweet Stuff</a></li>
+        <li><a href="#br-traditional-classics">Traditional Classics</a></li>
+        <li><a href="#br-international-classics">International Classics</a></li>
+      </ul>
+    </nav>
+
+    <!-- FIXED CATEGORY NAV — BAR -->
+    <nav class="menu-cat-nav" id="cat-nav-bar" aria-label="bar menu categories">
+      <ul>
+        <li><a href="#bloody-marys" class="active">Bloody Marys</a></li>
+        <li><a href="#mimosas">Mimosas</a></li>
+        <li><a href="#signature-mimosas">Singh Signature Mimosas</a></li>
+        <li><a href="#cocktails">Cocktails</a></li>
+        <li><a href="#beer">Beer</a></li>
+        <li><a href="#wine">Wine</a></li>
+        <li><a href="#liquor">Liquor</a></li>
+        <li><a href="#non-alcoholic">Non-Alcoholic</a></li>
+      </ul>
+    </nav>
+    <!-- FIXED CATEGORY NAV — DRINKS -->
+    <nav
+      class="menu-cat-nav"
+      id="cat-nav-drinks"
+      aria-label="drinks menu categories"
+    >
+      <ul>
+        <li>
+          <a href="#Ethiopiancoffee" class="active">Ethiopian Flavours</a>
+        </li>
+        <li><a href="#coffee">Coffee</a></li>
+        <li><a href="#Tea">Tea</a></li>
+      </ul>
+    </nav>
+    <!-- ETHIOPIAN FOOD -->
+    <nav
+      class="menu-cat-nav"
+      id="cat-nav-ethiopian"
+      aria-label="ethiopian menu categories"
+    >
+      <ul>
+        <li><a href="#et-tibs-sizzlers">Tibs / Sizzlers</a></li>
+        <li><a href="#et-specialties">House Specialties</a></li>
+        <li><a href="#et-stews">Chicken / Lamb Stews</a></li>
+        <li><a href="#et-seafood">Seafood</a></li>
+        <li><a href="#et-combo">Ethiopian Combo</a></li>
+      </ul>
+    </nav>
+    <!--DESSERTS-->
+    <nav
+      class="menu-cat-nav"
+      id="cat-nav-desserts"
+      aria-label="desserts menu categories"
+    >
+      <ul>
+        <li><a href="#desserts" class="active">Desserts</a></li>
+      </ul>
+    </nav>
+
+    <!-- MENU CONTENT -->
+    <main class="menu-page-content">
+      <div class="container">
+        <!-- ══════════════ FOOD PANEL ══════════════ -->
+        <div id="panel-food" class="menu-panel is-active">
+          <section class="menu-section" id="appetizers">
+            <h2 class="menu-section-title">Appetizers</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/platter.png"
+                    alt="Vegetarian Mixed Platter"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Vegetarian Mixed Platter</h3>
+                    <span class="price">$10</span>
+                  </div>
+                  <p class="card-desc">
+                    Sampling of appetizers including veggie pakora,veggie
+                    samosa,paneer pakora and aloo tikki served with chutney.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/naannachos.png"
+                    alt="Naan Nachos"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Naan Nachos</h3>
+                    <span class="price">Chicken $7 | Lamb $8 | Veggie $6</span>
+                  </div>
+                  <p class="card-desc">
+                    Homemade crispy naan wedges topped with diced tomato, onion,
+                    bell peppers, housemade E-Walk sauce and cheese.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/chanachat.png"
+                    alt="Chana ki Chat"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Chana ki Chat</h3>
+                    <span class="price">$7</span>
+                  </div>
+                  <p class="card-desc">
+                    tasty,tangy snack made from chickpeas with
+                    onions,coriander,tomatoes and lemon.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/pakora.webp"
+                    alt="Vegetable Pakora"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Vegetable Pakora</h3>
+                    <span class="price">$6</span>
+                  </div>
+                  <p class="card-desc">
+                    Crispy fried fritter made with gram
+                    flour,spices,onio,cauliflower and bell pepper.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/samosa.jpg" alt="Samosa" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Samosa</h3>
+                    <span class="price"
+                      >Beef $6 | Chicken $6 | Potato $5 | Lentil $5</span
+                    >
+                  </div>
+                  <p class="card-desc">
+                    2 deep fried crispy pastries with savory filling served with
+                    chutney.
+                  </p>
+                </div>
+              </div>
+
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/samosachat.png"
+                    alt="Samosa Chat"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Samosa Chat</h3>
+                    <span class="price">$10</span>
+                  </div>
+                  <p class="card-desc">
+                    2 tangy samosas served on a bed of chickpeas with dollops of
+                    yogurt and chutney.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="salads">
+            <h2 class="menu-section-title">Fresh Salads</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/greensalad.png"
+                    alt="Garden Salad"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Garden Salad</h3>
+                    <span class="price">$7</span>
+                  </div>
+                  <p class="card-desc">
+                    Lettuce, onion, bell peppers, tomatoes, cucumber, herbs with
+                    olive oil and lemon dressing.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/chefsalad.png"
+                    alt="Chef's Salad"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Chef's Salad</h3>
+                    <span class="price">$9</span>
+                  </div>
+                  <p class="card-desc">
+                    Lettuce, onion, bell peppers, tomatoes, herbs, olive oil,
+                    lemon dressing and grilled chicken.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/kachumber.png"
+                    alt="Kachumber Salad"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Kachchumber</h3>
+                    <span class="price">$7</span>
+                  </div>
+                  <p class="card-desc">
+                    Fresh chopped cucumbers, onions and tomatoes with housemade
+                    vinaigrette.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/beetroot.png"
+                    alt="Beet Root & Potato Salad"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Beet Root &amp; Potato Salad</h3>
+                    <span class="price">$8</span>
+                  </div>
+                  <p class="card-desc">
+                    Diced beet root and potatoes with fresh garlic, lemon and
+                    olive oil dressing.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="house-made-soups">
+            <h2 class="menu-section-title">House Made Soups</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/lentilsoup.png"
+                    alt="Lentil / Dal Soup"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Mulligatawny Soup</h3>
+                    <span class="price">$8</span>
+                  </div>
+                  <p class="card-desc">
+                    Lentil soup with chicken, herbs and warm spices.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/dalsoup.png"
+                    alt="Lentil / Dal Soup"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Lentil / Dal Soup</h3>
+                    <span class="price">$6</span>
+                  </div>
+                  <p class="card-desc">
+                    Mild red lentil soup seasoned Ethiopian style.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/chickensoup.png"
+                    alt="Chicken Soup"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Chicken Soup</h3>
+                    <span class="price">$8</span>
+                  </div>
+                  <p class="card-desc">
+                    Fresh homemade chicken soup with herbs and carrots.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="masalas-curries">
+            <h2 class="menu-section-title">Masalas &amp; Curries</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/tikkamasala.jpeg" alt="Tikka Masala" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Tikka Masala</h3>
+                    <span class="price"
+                      >Chicken $15 | Lamb $17 | Goat $17 | Salmon $16 |
+                      Vegetable $15</span
+                    >
+                  </div>
+                  <p class="card-desc">
+                    Chunks of roasted marinated meat in a spiced savory tomato
+                    slow-roasted puréed onion and butter sauce.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/curry.jpg" alt="Curry" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Curry</h3>
+                    <span class="price"
+                      >Chicken $15 | Lamb $17 | Goat $17 | Salmon $16 |
+                      Vegetable $15</span
+                    >
+                  </div>
+                  <p class="card-desc">
+                    Complex combination of spices and herbs — turmeric, cumin,
+                    coriander, ginger — prepared in a sauce.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/makhni.jpeg" alt="Makhni" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Makhni</h3>
+                    <span class="price"
+                      >Chicken $15 | Lamb $17 | Goat $17 | Salmon $16 | Paneer
+                      $13</span
+                    >
+                  </div>
+                  <p class="card-desc">
+                    Tender marinated cubes of meat or paneer simmered in a
+                    creamy spiced curry sauce with nuts and raisins.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/saag.jpeg" alt="Saag" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Saag</h3>
+                    <span class="price"
+                      >Chicken $15 | Lamb $17 | Goat $17 | Salmon $16 |
+                      Vegetable $15</span
+                    >
+                  </div>
+                  <p class="card-desc">
+                    Leafy vegetable dish — spinach, broccoli, mustard greens
+                    stewed with tomato, coriander, garlic, ginger and cream.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/ginger.jpeg" alt="Ginger" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Ginger</h3>
+                    <span class="price"
+                      >Chicken $15 | Lamb $17 | Goat $17 | Salmon $16 |
+                      Vegetable $15</span
+                    >
+                  </div>
+                  <p class="card-desc">
+                    A creamy curry cooked in ginger, garlic, bell pepper,
+                    turmeric and yogurt.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/vindaloo.jpeg" alt="Vindaloo" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Vindaloo</h3>
+                    <span class="price"
+                      >Chicken $15 | Lamb $17 | Goat $17 | Salmon $16 | Aloo
+                      $11</span
+                    >
+                  </div>
+                  <p class="card-desc">
+                    Portuguese influenced spice flavored curry with vinegar and
+                    potatoes.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/shahi.jpg" alt="Shahi Korma / Paneer" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Shahi Korma / Paneer</h3>
+                    <span class="price"
+                      >Chicken $15 | Lamb $17 | Goat $17 | Salmon $16 |
+                      Vegetable $15</span
+                    >
+                  </div>
+                  <p class="card-desc">
+                    Meat or veggies blended with cumin seeds, cashews, raisins,
+                    tomato puree, coriander, garlic, ginger and cream or coconut
+                    milk.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/jalfrezi.jpeg" alt="Jelfrezi" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Jelfrezi</h3>
+                    <span class="price"
+                      >Chicken $15 | Lamb $17 | Goat $17 | Salmon $16 |
+                      Vegetable $13</span
+                    >
+                  </div>
+                  <p class="card-desc">
+                    Scratch made tomato and onion puree mixed with green
+                    peppers, coriander, turmeric and ginger.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/rogan.jpeg" alt="Rogan Josh" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Rogan Josh</h3>
+                    <span class="price"
+                      >Chicken $15 | Lamb $17 | Goat $17 | Salmon $16 |
+                      Vegetable $15</span
+                    >
+                  </div>
+                  <p class="card-desc">
+                    Aromatic curried meat dish made with ginger, garlic and
+                    finished with a touch of yogurt.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/mango.jpeg" alt="Mango" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Mango</h3>
+                    <span class="price">$15</span>
+                  </div>
+                  <p class="card-desc">
+                    Complex combination of spices and herbs prepared in a mango
+                    puree.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/bharta.jpeg" alt="Bhartha" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Bhartha</h3>
+                    <span class="price"> $15</span>
+                  </div>
+                  <p class="card-desc">
+                    Stewed eggplant with vegetables and mild masala, spices,
+                    turmeric and ginger puree.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/dalmakhani.jpeg" alt="Dal Makhani" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Dal Makhani</h3>
+                    <span class="price">$11</span>
+                  </div>
+                  <p class="card-desc">
+                    creamed lentils prepared with butter,cream and a touch of
+                    spices.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/daltadka.jpeg" alt="Dal Tadka" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Dal Tadka</h3>
+                    <span class="price">$11</span>
+                  </div>
+                  <p class="card-desc">
+                    Yellow lentils cooked with onions, tomatoes and tempered
+                    with cumin, garlic and red chili.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/kofta.jpg" alt="Malai Kofta" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Malai Kofta</h3>
+                    <span class="price">$13</span>
+                  </div>
+                  <p class="card-desc">
+                    Mixed Vegetable balls cooked in onion and tomato sauce.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/garlicgobi.jpg" alt="Garlic Gobi" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Garlic Gobi</h3>
+                    <span class="price">$11</span>
+                  </div>
+                  <p class="card-desc">
+                    Cauliflower cooked home style with fresh garlic,and mild
+                    Indian Spices.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/aloocholey.jpeg" alt="Aloo Choley" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Aloo Choley</h3>
+                    <span class="price">$11</span>
+                  </div>
+                  <p class="card-desc">
+                    Chick peas and potatoes cooked with mild spices.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="tandoori">
+            <h2 class="menu-section-title">Tandoori</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="/assets/Food-images/tandoori.webp" alt="Tandoori Chicken" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Tandoori Chicken</h3>
+                    <span class="price">bone in $16</span>
+                  </div>
+                  <p class="card-desc">
+                    Classic clay oven roasted chicken with tandoori spice
+                    marinade.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="/assets/Food-images/tikka.jpg"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Chicken Tikka</h3>
+                    <span class="price">boneless $15</span>
+                  </div>
+                  <p class="card-desc">
+                    Boneless chicken pieces in tandoori marinade, clay oven
+                    cooked.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"><img src="/assets/Food-images/sabaz.jpeg" alt="Sabaz Tandoori" /></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Sabaz Tandoori</h3>
+                    <span class="price">Veggie $14</span>
+                  </div>
+                  <p class="card-desc">
+                    Seasonal vegetables marinated and roasted in tandoor clay
+                    oven.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"><img src="/assets/Food-images/kebab.jpg" alt="Seekh Kabab" /></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Seekh Kabab</h3>
+                    <span class="price"
+                      >Chicken $16 | Lamb $18 | Salmon $18</span
+                    >
+                  </div>
+                  <p class="card-desc">
+                    Skewered minced meat spiced and cooked in clay oven.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="/assets/Food-images/salmontikka.jpeg" alt="Salmon Tikka" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Salmon Tikka</h3>
+                    <span class="price">$20</span>
+                  </div>
+                  <p class="card-desc">
+                    Salmon marinated in yogurt and spices, roasted in a tandoor
+                    clay oven, served with grilled vegetables and basmati rice.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="/assets/Food-images/chilli.jpg" alt="Chili Chicken" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Chili Chicken</h3>
+                    <span class="price">$14</span>
+                  </div>
+                  <p class="card-desc">
+                    Stir fried chicken sautéed in onions and bell pepper,
+                    seasoned with spices.
+                  </p>
+                </div>
+              </div>
+             
+            </div>
+          </section>
+
+          <section class="menu-section" id="biryani">
+            <h2 class="menu-section-title">Biryani</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/biryani.jpg" alt="Biryani" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Biryani</h3>
+                    <span class="price"
+                      >Vegetable $12 | Chicken $14 | Lamb $15 | Goat $15</span
+                    >
+                  </div>
+                  <p class="card-desc">
+                    Slow cooked, layered fragrant basmati rice dish with herbs,
+                    spices, fresh peas, nuts, raisins and your choice of
+                    protein.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/combobiryani.webp" alt="Special Combo Biryani" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Special Combo Biryani</h3>
+                    <span class="price">$18</span>
+                  </div>
+                  <p class="card-desc">
+                    Chicken, lamb and vegetables cooked in basmati rice.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="menu-section" id="Lunch Specials">
+            <h2 class="menu-section-title">Lunch Specials</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/thali.png"
+                    alt="Thali"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Vegetarian Thali Platter</h3>
+                    <span class="price">$11</span>
+                  </div>
+                  <p class="card-desc">
+                    Saag Paneer,chana masala, mushroom mattar, kheer, rice and
+                    naan
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/chickenthali.webp" alt="Everyday Indian Thali" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Everyday Indian Thali</h3>
+                    <span class="price">$12</span>
+                  </div>
+                  <p class="card-desc">
+                    Chicken Curry, Chicken Tikka masala, Chicken Saag, kheer or
+                    gulab-jamun,basmati rice, naan
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="modern-indian">
+            <h2 class="menu-section-title">Modern Indian</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/burrito.webp"
+                    alt="Naan Burrito"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Naan Burrito</h3>
+                    <span class="price"
+                      >Ribeye Steak $8 | Chicken $8 | Lamb $9 | Veggie $9</span
+                    >
+                  </div>
+                  <p class="card-desc">
+                    Hand held,oven baked flatbread naan wrapped around slow
+                    cooked stewed protein served with tomato,sauteed onion,bell
+                    pepper and housemade E-Walk Masala sauce.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/sandwich.jpg" alt="Salmon Sandwich" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Salmon Sandwich</h3>
+                    <span class="price">$15</span>
+                  </div>
+                  <p class="card-desc">
+                    Fresh Baked Flatbread Naan , Wild Caught Salmon, organic
+                    wild baby arugula,pickled red onions, topped with E-walk
+                    aioli.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/salmonpowerbowl.png" alt="Salmon Power Bowl" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Salmon Power Bowl</h3>
+                    <span class="price">$15</span>
+                  </div>
+                  <p class="card-desc">
+                    Wild caught salmon over fresh spinach, quinoa or basmati
+                    rice, avocado, masala black beans, mushrooms, tomatoes,
+                    roasted red pepper, pickled red onions and honey
+                    vinaigrette.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/Quinoapowerbowl.png" alt="Quinoa Power Bowl" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Quinoa Power Bowl</h3>
+                    <span class="price">$13</span>
+                  </div>
+                  <p class="card-desc">
+                    Tri-color quinoa, basmati rice, roasted corn, avocado,
+                    pickled red onions, organic wild baby arugula, cilantro,
+                    paneer, cheese and tamarind salsa.
+                  </p>
+                </div>
+              </div>
+
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/naanpizza.png" alt="Naan Pizza" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Naan Pizza</h3>
+                    <span class="price"
+                      >Chicken Masala $8 | Veggie $7 | Cheese $7</span
+                    >
+                  </div>
+                  <p class="card-desc">
+                    Made on a thinner crispy naan crust using lighter toppings,
+                    tomato sauce, bell peppers and onions.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="menu-section" id="indian-breads">
+            <h2 class="menu-section-title">Indian Breads</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/garlic naan.jpg"
+                    alt="Garlic Naan"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Garlic Naan</h3>
+                    <span class="price">$5</span>
+                  </div>
+                  <p class="card-desc">
+                    Flat bread brushed with garlic and cilantro.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/gobinaan.jpeg"
+                    alt="Gobhi Naan"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Gobhi Naan</h3>
+                    <span class="price">$5</span>
+                  </div>
+                  <p class="card-desc">
+                    Stuffed with cauliflower and warm Indian spices.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/kashmirinaan.jpeg"
+                    alt="Kashmiri Naan"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Kashmiri Naan</h3>
+                    <span class="price">$5</span>
+                  </div>
+                  <p class="card-desc">
+                    Sweet naan stuffed with raisins, cashews and coconut.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/hotnaan.jpeg"
+                    alt="Hot & Spicy Naan"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Hot &amp; Spicy Naan</h3>
+                    <span class="price">$5</span>
+                  </div>
+                  <p class="card-desc">
+                    Naan rubbed with green chilies and chili powder.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/bhatura.jpg" alt="Bhatura" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Bhatura</h3>
+                    <span class="price">$5</span>
+                  </div>
+                  <p class="card-desc">
+                    Fluffy deep fried leavened sourdough bread.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/roti.jpg" alt="Chapati / Roti" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Chapati / Roti</h3>
+                    <span class="price">$5</span>
+                  </div>
+                  <p class="card-desc">
+                    Traditional baked whole wheat flatbread.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/aloonaan.jpg" alt="Aloo Naan" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Aloo Naan</h3>
+                    <span class="price">$5</span>
+                  </div>
+                  <p class="card-desc">
+                    Naan stuffed with lightly spiced potatoes.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/paneernaan.jpg"
+                    alt="Paneer Naan"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Paneer Naan</h3>
+                    <span class="price">$5</span>
+                  </div>
+                  <p class="card-desc">
+                    Naan stuffed with cottage cheese and cilantro.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="menu-section" id="indian-sides">
+            <h2 class="menu-section-title">Indian Sides</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/raita.jpg" alt="Raita" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Raita</h3>
+                    <span class="price">$3</span>
+                  </div>
+                  <p class="card-desc">
+                    Cooling yogurt sauce with cucumber, mint and spices.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/achar.jpg" alt="Achar" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Achar</h3>
+                    <span class="price">$3</span>
+                  </div>
+                  <p class="card-desc">
+                    Tangy Indian pickle made with seasonal vegetables and
+                    spices.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/mangopickle.jpeg"
+                    alt="Mango Pickle"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Mango Chutney</h3>
+                    <span class="price">$3</span>
+                  </div>
+                  <p class="card-desc">
+                    Sweet-spicy chutney made from mango, vinegar and aromatic
+                    spices.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <!-- END FOOD PANEL -->
+
+        <!-- ══════════════ BRUNCH PANEL ══════════════ -->
+        <div id="panel-brunch" class="menu-panel" style="display: none" hidden>
+          <section class="menu-section" id="br-main-event">
+            <h2 class="menu-section-title">The Main Event</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/shakuksha.jpg" alt="Indian Style Shakshuka" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Indian Style Shakshuka</h3>
+                    <span class="price">$12</span>
+                  </div>
+                  <p class="card-desc">
+                    Eggs poached in tomato sauce with peppers, onion, garlic and
+                    cumin.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/skillet.webp" alt="Skillet Hash" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Skillet Hash</h3>
+                    <span class="price">$12</span>
+                  </div>
+                  <p class="card-desc">
+                    Red potatoes, vegetables and caramelized onions with spicy
+                    hollandaise.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/smoked.jpg" alt="Smoked Salmon Benedict" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Smoked Salmon Benedict</h3>
+                    <span class="price">$14</span>
+                  </div>
+                  <p class="card-desc">
+                    Toasted bagel, herbed cream cheese, smoked salmon and egg.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/wafflechicken.jpeg" alt="Waffle N' Chicken" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Waffle N' Chicken</h3>
+                    <span class="price">$12</span>
+                  </div>
+                  <p class="card-desc">
+                    Handbreaded chicken with traditional waffle and Ohio maple
+                    syrup.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/waffle.png" alt="Waffle N' Fruit" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Waffle N' Fruit</h3>
+                    <span class="price">$10</span>
+                  </div>
+                  <p class="card-desc">
+                    Waffle topped with strawberries and blueberries, powdered
+                    sugar and syrup.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/kolkatarolls.jpg" alt="Kolkata Egg Rolls" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Kolkata Egg Rolls</h3>
+                    <span class="price">$12</span>
+                  </div>
+                  <p class="card-desc">
+                    Street-style rolled eggs and veggies with masala and aioli
+                    in Indian bread.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/indiansandwich.jpeg" alt="Indian Railway Omelette Sandwich" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Indian Railway Omelette Sandwich</h3>
+                    <span class="price">$12</span>
+                  </div>
+                  <p class="card-desc">
+                    Onion, coriander, pepper and scrambled eggs between two
+                    slices.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+              <img src="assets/Food-images/steak.jpeg" alt="Steak N' Eggs" /></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Steak N' Eggs</h3>
+                    <span class="price">$12</span>
+                  </div>
+                  <p class="card-desc">
+                    Ribeye with eggs and spicy hollandaise on artisan bread.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/omelette.jpg" alt="Three-Cheese Veggie Omelette" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Three-Cheese Veggie Omelette</h3>
+                    <span class="price">$12</span>
+                  </div>
+                  <p class="card-desc">
+                    Herbed cheese, mushrooms, tomato and arugula omelette topped
+                    with cilantro.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="br-sweet-stuff">
+            <h2 class="menu-section-title">The Sweet Stuff</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/bruleed.png" alt="Bathura Bruleed" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Bathura Bruleed</h3>
+                    <span class="price">$10</span>
+                  </div>
+                  <p class="card-desc">
+                    Lightly fried Indian bread topped with bananas or
+                    strawberries and maple syrup.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/frenchtoast.webp"
+                    alt="French Toast Bruleed"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">French Toast Bruleed</h3>
+                    <span class="price">$10</span>
+                  </div>
+                  <p class="card-desc">
+                    Thick-cut French toast with banana or strawberries and maple
+                    butter syrup.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/pancakes.webp"
+                    alt="Traditional Fluffy Pancakes"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Traditional Fluffy Pancakes</h3>
+                    <span class="price">$12</span>
+                  </div>
+                  <p class="card-desc">
+                    Two scratchmade pancakes with berries, powdered sugar and
+                    maple syrup.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="br-traditional-classics">
+            <h2 class="menu-section-title">Traditional Classics</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/alooparatha.jpeg" alt="Aloo Pratha" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Aloo Pratha</h3>
+                    <span class="price">$10</span>
+                  </div>
+                  <p class="card-desc">
+                    Flatbread stuffed with potatoes, served with housemade
+                    yogurt.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/pavbhaji.jpeg" alt="Pav Bhaji" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Pav Bhaji</h3>
+                    <span class="price">$12</span>
+                  </div>
+                  <p class="card-desc">
+                    Buttery mashed mixed vegetables with masala, served with
+                    soft buns.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/idli.webp" alt="Idli" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Idli</h3>
+                    <span class="price">$10</span>
+                  </div>
+                  <p class="card-desc">
+                    Fluffy steamed cakes with yogurt, semolina and herbs, served
+                    with chutney.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="br-international-classics">
+            <h2 class="menu-section-title">International Classics</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/dosa_waffle.png" alt="Dosa Waffle" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Dosa Waffle</h3>
+                    <span class="price">$10</span>
+                  </div>
+                  <p class="card-desc">
+                    Indian-style savory waffle from fermented rice and lentils;
+                    served with fruit and maple syrup. Veg / Veg GF.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/dosacrepe.png" alt="Savory Dosa Crepes" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Savory Dosa Crepes</h3>
+                    <span class="price">$10 | add scrambled eggs side +$2</span>
+                  </div>
+                  <p class="card-desc">
+                    Thin crispy crepes filled with potatoes and vegetables. Veg
+                    / Veg GF.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <!-- END BRUNCH PANEL -->
+
+        <!-- ══════════════ BAR PANEL ══════════════ -->
+        <div id="panel-bar" class="menu-panel" style="display: none" hidden>
+          <section class="menu-section" id="bloody-marys">
+            <h2 class="menu-section-title">Bloody Marys</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/bloodymary.jpeg"
+                    alt="Bloody Mary"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Bloody Mary</h3>
+                    <span class="price">$7</span>
+                  </div>
+                  <p class="card-desc">
+                    Vodka, lemon juice, celery, pepper and hot sauce.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/infusedmary.webp"
+                    alt="Infused Mary"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Infused Mary</h3>
+                    <span class="price">Glass $8 | Pitcher $26</span>
+                  </div>
+                  <p class="card-desc">
+                    Stoli Vanilla Infused Vodka with house made Bloody Mary mix.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/greygoose.jpeg"
+                    alt="Grey Goose Mary"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Grey Goose Mary</h3>
+                    <span class="price">Glass $9 | Pitcher $29</span>
+                  </div>
+                  <p class="card-desc">
+                    Grey Goose Vodka with house made Bloody Mary mix.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/jamomary.jpeg" alt="Jamo Mary" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Jamo Mary</h3>
+                    <span class="price">Glass $9 | Pitcher $29</span>
+                  </div>
+                  <p class="card-desc">
+                    Jameson Irish Whiskey with house made Bloody Mary mix.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/virginmary.jpeg"
+                    alt="Virgin Mary"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Virgin Mary</h3>
+                    <span class="price">Glass $8 | Pitcher $27</span>
+                  </div>
+                  <p class="card-desc">Housemade Bloody Mary mix — YUM!</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="mimosas">
+            <h2 class="menu-section-title">Prosecco Mimosas</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/mimosa1.jpeg"
+                    alt="Orange Mimosa"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">
+                      Fresh Squeezed Orange Juice &amp; Prosecco
+                    </h3>
+                    <span class="price">Glass $7 | Pitcher $22</span>
+                  </div>
+                  <p class="card-desc">
+                    Fresh squeezed orange juice with prosecco.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/mimosa2.jpeg"
+                    alt="Cranberry Mimosa"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Cranberry Juice &amp; Prosecco</h3>
+                    <span class="price">Glass $7 | Pitcher $22</span>
+                  </div>
+                  <p class="card-desc">Cranberry juice with prosecco.</p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/mimosa3.jpeg"
+                    alt="Lemon Strawberry Mimosa"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">
+                      Virgin Mimosa with Fresh Squeezed Orange Juice
+                    </h3>
+                    <span class="price">Glass $6 | Pitcher $20</span>
+                  </div>
+                  <p class="card-desc">
+                    Non-alcoholic mimosa with fresh squeezed orange juice.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/mimosa4.jpeg"
+                    alt="Virgin Mimosa with Cranberry Juice"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">
+                      Virgin Mimosa with Cranberry Juice
+                    </h3>
+                    <span class="price">Glass $6 | Pitcher $20</span>
+                  </div>
+                  <p class="card-desc">
+                    Non-alcoholic mimosa with cranberry juice.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="signature-mimosas">
+            <ion-icon
+              name="ribbon-outline"
+              style="font-size: 4rem; color: hsl(140, 93%, 21%)"
+            ></ion-icon>
+            <h2 class="menu-section-title">Singh Signature Mimosas</h2>
+
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/sunrise.png" alt="Sunrise Mimosa" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Sunrise Mimosa</h3>
+                    <span class="price">Glass $7 | Pitcher $22</span>
+                  </div>
+                  <p class="card-desc">
+                    Orange, cherry grenadine and prosecco.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/meonstraw.webp" alt="Lemon Strawberry Mimosa" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Lemon Strawberry</h3>
+                    <span class="price">Glass $7 | Pitcher $22</span>
+                  </div>
+                  <p class="card-desc">
+                    Lemon juice, strawberry puree and prosecco.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/raspmimosa.jpg" alt="Raspberry Mimosa" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Raspberry Mimosa</h3>
+                    <span class="price">Glass $7 | Pitcher $22</span>
+                  </div>
+                  <p class="card-desc">
+                    Lemon wedge, raspberries, raspberry soda, Chambord and
+                    sparkling Moscato.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="cocktails">
+            <h2 class="menu-section-title">Cocktails</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/cosmopolitan.jpeg"
+                    alt="Cosmopolitan"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Cosmopolitan</h3>
+                    <span class="price">$7.50</span>
+                  </div>
+                  <p class="card-desc">
+                    Vodka, cranberry juice and triple sec.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/margarita.jpeg"
+                    alt="Margarita"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Margarita</h3>
+                    <span class="price">$7</span>
+                  </div>
+                  <p class="card-desc">
+                    Tequila, triple sec and lime. Served frozen or on the rocks.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/martini.webp" alt="Martini" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Martini</h3>
+                    <span class="price">$8</span>
+                  </div>
+                  <p class="card-desc">Gin and splash of vermouth.</p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/screwdriver.jpeg"
+                    alt="Screwdriver"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Screwdriver</h3>
+                    <span class="price">$6</span>
+                  </div>
+                  <p class="card-desc">Vodka and orange juice.</p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/gin-tonic.jpeg"
+                    alt="Gin & Tonic"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Gin &amp; Tonic</h3>
+                    <span class="price">$6</span>
+                  </div>
+                  <p class="card-desc">Gin and tonic water with lime.</p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/whiterussian.jpeg"
+                    alt="White Russian"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">White Russian</h3>
+                    <span class="price">$7</span>
+                  </div>
+                  <p class="card-desc">
+                    Vodka, cream and Kahlua coffee liqueur.
+                  </p>
+                </div>
+              </div>
+
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/alabamaslammer.jpeg"
+                    alt="Alabama Slammer"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Alabama Slammer</h3>
+                    <span class="price">$8</span>
+                  </div>
+                  <p class="card-desc">
+                    Vodka, Southern Comfort, orange juice, gin and amaretto.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/darkstormy.jpeg"
+                    alt="Dark 'n Stormy"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Dark 'n Stormy</h3>
+                    <span class="price">$7</span>
+                  </div>
+                  <p class="card-desc">
+                    Dark rum poured over ginger beer with slice of lime.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/creamsicle.jpeg"
+                    alt="Creamsicle"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Creamsicle</h3>
+                    <span class="price">$7.50</span>
+                  </div>
+                  <p class="card-desc">
+                    Vanilla vodka, triple sec, orange juice and half-n-half.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/fuzzynavel.webp"
+                    alt="Fuzzy Navel"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Fuzzy Navel</h3>
+                    <span class="price">$7</span>
+                  </div>
+                  <p class="card-desc">Peach Schnapps, Orange Juice.</p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/hollywood.jpg" alt="Hollywood" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Hollywood</h3>
+                    <span class="price">$6.50</span>
+                  </div>
+                  <p class="card-desc">
+                    Vodka,Pineapple Juice,Black Raspberry liquor.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/tequilasunrise.jpeg"
+                    alt="Tequila Sunrise"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Tequila Sunrise</h3>
+                    <span class="price">$6.50</span>
+                  </div>
+                  <p class="card-desc">Tequila, orange juice and grenadine.</p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/seabreeze.jpg"
+                    alt="Sea Breeze"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Sea Breeze</h3>
+                    <span class="price">$6</span>
+                  </div>
+                  <p class="card-desc">
+                    Vodka, cranberry juice and grapefruit.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/scarlett.jpeg"
+                    alt="Scarlett O'Hara"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Scarlett O'Hara</h3>
+                    <span class="price">$7</span>
+                  </div>
+                  <p class="card-desc">
+                    Southern Comfort, lime juice and cranberry juice.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/titos.jpg"
+                    alt="Tito's Cucumber Lemon Mule"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Tito's Cucumber Lemon Mule</h3>
+                    <span class="price">$7</span>
+                  </div>
+                  <p class="card-desc">
+                    Handmade vodka, cucumber lemon sour and grapefruit.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/peach.jpg" alt="Peach Bellini" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Peach Bellini</h3>
+                    <span class="price">$8</span>
+                  </div>
+                  <p class="card-desc">
+                    Prosecco champagne, peach and fresh squeezed orange juice.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="beer">
+            <h2 class="menu-section-title">Beer</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/importedbeer.jpeg"
+                    alt="Imported Beer"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Imported</h3>
+                    <span class="price">$4 – $8</span>
+                  </div>
+                  <p class="card-desc">
+                    Heineken, Dos Equis, Tecate, Taj Mahal, Kingfisher, Stella
+                    Artois, Crabbie's Ginger Beer, Meta Ethiopian, St. George
+                    Ethiopian, Corona, Modelo, Blue Moon.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/domestic.webp"
+                    alt="Domestic Beer"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Domestic</h3>
+                    <span class="price">$3 – $4</span>
+                  </div>
+                  <p class="card-desc">
+                    Bud Light, Budweiser, Miller Lite, Coors Light, Lagunantas,
+                    Samuel Adams, Michelob, Michelob Ultra Amber, Yuengling,
+                    Kentucky Bourbon Ale, Sierra Nevada, Angry Orchard and more.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/breweries.jpg"
+                    alt="Local Breweries"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Local Breweries</h3>
+                    <span class="price">$4</span>
+                  </div>
+                  <p class="card-desc">
+                    Rhinegeist, MadTree, Moerlein, Braxton, Psychopathy, Fifty
+                    West, Dogfish 60 Min, Taft Ale and other local Cincinnati
+                    selections.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="wine">
+            <h2 class="menu-section-title">Wine List</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/housewhites.webp"
+                    alt="House Wine"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">House Whites</h3>
+                    <span class="price">Glass $7 | Bottle $28</span>
+                  </div>
+                  <p class="card-desc">
+                    Clos Du Bois California Pinot Grigio, Chardonnay or Luccio
+                    Moscato.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/housered.jpeg"
+                    alt="House Wine"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">House Reds</h3>
+                    <span class="price">Glass $7 | Bottle $28</span>
+                  </div>
+                  <p class="card-desc">
+                    Clos Du Bois California Merlot, Pinot Noir or Cabernet
+                    Sauvignon.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/featuredwhite.jpg"
+                    alt="Featured Whites"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Featured Whites</h3>
+                    <span class="price">Glass $8 | Bottle $32</span>
+                  </div>
+                  <p class="card-desc">
+                    William Hill Chardonnay, Sista Moscato d'Asti, Chateau St
+                    Michelle Riesling, Overstone Sauvignon Blanc, Franciscan
+                    Chardonnay, Yes Way Rosé.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/featuredred.jpeg"
+                    alt="Featured Reds"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Featured Reds</h3>
+                    <span class="price">Glass $8 | Bottle $32</span>
+                  </div>
+                  <p class="card-desc">
+                    Alamos Malbec, William Hill Pinot Noir, Louis Martini
+                    Cabernet Sauvignon.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/sparkling.jpeg"
+                    alt="Sparkling Wine"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">LaMarca Prosecco (Sparkling)</h3>
+                    <span class="price">Glass $8 | Bottle $32</span>
+                  </div>
+                  <p class="card-desc">
+                    Italy — fresh citrus with hints of honey and white florals.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/kim.avif"
+                    alt="Sauvignon Blanc"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Kim Crawford Sauvignon Blanc</h3>
+                    <span class="price">Glass $9 | Bottle $36</span>
+                  </div>
+                  <p class="card-desc">
+                    New Zealand — dry and crisp with ripe strawberry and stone
+                    fruit.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="liquor">
+            <h2 class="menu-section-title">Liquor</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/scotch.jpeg" alt="Scotch" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Scotch</h3>
+                    <span class="price"
+                      >Well $5 <br />
+                      Dewars $6 <br />
+                      12yr Macallan $12 <br />12yr Glenlivet $9 <br />
+                      12yr Glenfiddich $10</span
+                    >
+                  </div>
+                  <p class="card-desc">
+                    Premium scotch whisky selection by the glass.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/whiskey.png" alt="Bourbon" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Bourbon / Whiskey</h3>
+                    <span class="price"
+                      >Well $3 <br />
+                      Jack Daniels $6 <br />
+                      Jim Beam $6 <br />
+                      Makers Mark $7 <br />
+                      Crown Royal $7 <br />
+                      Woodford Reserve $7</span
+                    >
+                  </div>
+                  <p class="card-desc">
+                    American bourbon and whiskey selection.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/vodka.jpeg" alt="Vodka" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Vodka</h3>
+                    <span class="price"
+                      >Well $3 <br />
+                      Grey Goose $7 <br />
+                      Ketel One $7 <br />
+                      Absolut $6 <br />
+                      Smirnoff $6 <br />
+                      Chopin $7 <br />
+                      Stoli $6</span
+                    >
+                  </div>
+                  <p class="card-desc">Premium vodka selection.</p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/gin.jpeg" alt="Gin" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Gin</h3>
+                    <span class="price"
+                      >Well $3 <br />
+                      Beefeaters $6 <br />
+                      Tanqueray $6 <br />
+                      Bombay Sapphire $7</span
+                    >
+                  </div>
+                  <p class="card-desc">Classic gin selection.</p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/tequila.jpeg" alt="Tequila" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Tequila</h3>
+                    <span class="price"
+                      >Well $5 <br />
+                      Jose Cuervo Gold $6 <br />
+                      Patron Silver $7</span
+                    >
+                  </div>
+                  <p class="card-desc">Tequila selection by the glass.</p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/rum.jpeg" alt="Rum" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Rum</h3>
+                    <span class="price"
+                      >Well $3 <br />
+                      Bacardi Lt $6 <br />
+                      Captain Morgan Spiced $6 <br />
+                      Malibu Coconut $6</span
+                    >
+                  </div>
+                  <p class="card-desc">Rum selection by the glass.</p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/brandy.jpeg" alt="Cognac" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Cognac / Brandy</h3>
+                    <span class="price"
+                      >Well $5 <br />
+                      Christian Brothers $5 <br />
+                      Hennessey $7 <br />
+                      Courvoisier $7</span
+                    >
+                  </div>
+                  <p class="card-desc">Cognac and brandy selection.</p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/cordials.jpg" alt="Cordials" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Cordials</h3>
+                    <span class="price">$5 – $7</span>
+                  </div>
+                  <p class="card-desc">
+                    Amaretto Di Soranno, Pama Pomegranate Liqueur, Triple Sec,
+                    Kahlua, Grand Marnier, Sweet Vermouth, Dry Vermouth,
+                    Chambord, Baileys Irish Creme.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="non-alcoholic">
+            <h2 class="menu-section-title">Non-Alcoholic Drinks</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/mangolemonade.webp"
+                    alt="Mango Lemonade"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Mango Lemonade</h3>
+                    <ion-icon
+                      name="ribbon-outline"
+                      style="font-size: 4rem; color: hsl(140, 93%, 21%)"
+                    ></ion-icon>
+                    <span class="price">$5</span>
+                  </div>
+                  <p class="card-desc">Iced fresh squeezed mango lemonade.</p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/strawberrylemonade.jpeg"
+                    alt="Strawberry Lemonade"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Strawberry Lemonade</h3>
+                    <ion-icon
+                      name="ribbon-outline"
+                      style="font-size: 4rem; color: hsl(140, 93%, 21%)"
+                    ></ion-icon>
+                    <span class="price">$5</span>
+                  </div>
+                  <p class="card-desc">
+                    Iced fresh squeezed strawberry lemonade.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/freshjuice.webp"
+                    alt="Fresh Pressed Juices"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Fresh Pressed Juices</h3>
+                    <ion-icon
+                      name="ribbon-outline"
+                      style="font-size: 4rem; color: hsl(140, 93%, 21%)"
+                    ></ion-icon>
+                    <span class="price">$5 – $6</span>
+                  </div>
+                  <p class="card-desc">
+                    Mango juice, mango + avocado juice, papaya juice and power
+                    juice.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/mangolassi.jpeg"
+                    alt="Mango Lassi"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Mango Lassi</h3>
+                    <span class="price">$6</span>
+                  </div>
+                  <p class="card-desc">
+                    Chilled yogurt-based mango smoothie drink.
+                  </p>
+                </div>
+              </div>
+
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/soda.jpg"
+                    alt="Sodas and Mineral Water"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Mineral Water &amp; Sodas</h3>
+                    <span class="price">$3 – $4</span>
+                  </div>
+                  <p class="card-desc">Mineral water and Coke products.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <!-- END BAR PANEL -->
+        <!-- ══════════════ DRINKS PANEL ══════════════ -->
+        <div id="panel-drinks" class="menu-panel" style="display: none" hidden>
+          <section class="menu-section" id="Ethiopiancoffee">
+            <h2 class="menu-section-title">Ethiopian Flavours</h2>
+            <hr class="menu-section-divider" />
+
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/yirgi.webp"
+                    alt="Yirgacheffe"
+                    class="menu-thumb"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Yirgacheffe</h3>
+                    <span class="price">Small $5 | Medium $6 | Large $7</span>
+                  </div>
+                  <p class="card-desc">
+                    Heavy fruit and wine flavour, earthy taste. Served Hot or
+                    Iced.
+                  </p>
+                </div>
+              </div>
+
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/tomoca.jpg"
+                    alt="Tomoca"
+                    class="menu-thumb"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Tomoca</h3>
+                    <span class="price">Small $5 | Medium $6 | Large $7</span>
+                  </div>
+                  <p class="card-desc">
+                    100% Arabica beans, originating from Kaffa — the birthplace
+                    of coffee. Served Hot or Iced.
+                  </p>
+                </div>
+              </div>
+
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/sidama.jpeg"
+                    alt="Sidama"
+                    class="menu-thumb"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Sidama</h3>
+                    <span class="price">Small $5 | Medium $6 | Large $7</span>
+                  </div>
+                  <p class="card-desc">
+                    Grown 1800m above sea level in South Central Ethiopia.
+                    Creamy texture with hints of mixed berries, red cherry and
+                    white flowers. Served Hot or Iced.
+                  </p>
+                </div>
+              </div>
+
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/harrar.jpeg"
+                    alt="Harrar"
+                    class="menu-thumb"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Harrar</h3>
+                    <span class="price">Small $5 | Medium $6 | Large $7</span>
+                  </div>
+                  <p class="card-desc">
+                    100% Arabica beans. Bold and sweet berry flavour with hints
+                    of cinnamon, cardamom and blueberry. Served Hot or Iced.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/Ethiopian_coffee.png"
+                    alt="Ethiopian Black Tea"
+                    class="menu-thumb"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Ethiopian Black Tea</h3>
+                    <span class="price">Reg $5 | Grande $6</span>
+                  </div>
+                  <p class="card-desc">Served Hot or Iced.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="coffee">
+            <h2 class="menu-section-title">Coffee</h2>
+            <hr class="menu-section-divider" />
+
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/espresso.webp"
+                    alt="Espresso"
+                    class="menu-thumb"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Espresso</h3>
+                    <span class="price">$4</span>
+                  </div>
+                  <p class="card-desc">Served Hot or Iced.</p>
+                </div>
+              </div>
+
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/americano.jpeg"
+                    alt="Americano"
+                    class="menu-thumb"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Americano</h3>
+                    <span class="price"> $4</span>
+                  </div>
+                  <p class="card-desc">Served Hot or Iced.</p>
+                </div>
+              </div>
+
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/latte.jpg"
+                    alt="Lattes"
+                    class="menu-thumb"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Lattes</h3>
+                    <span class="price">Small $5 | Medium $6 | Large $7</span>
+                  </div>
+                  <p class="card-desc">
+                    Plain,Lavendar Honey,Caramel Macchiato,Cafe Mocha
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="menu-section" id="Tea">
+            <h2 class="menu-section-title">Tea</h2>
+            <hr class="menu-section-divider" />
+
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/Chai.avif"
+                    alt="Chai"
+                    class="menu-thumb"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">CHAI</h3>
+                    <span class="price">Reg $5 | Grande $6</span>
+                  </div>
+                  <p class="card-desc">
+                    Freshmade in house, masala tea made by boiling black tea
+                    leaves in milk and water with a mixture of aromatic herbs
+                    and spices
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/shaee.webp"
+                    alt="Shaee"
+                    class="menu-thumb"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Shaee</h3>
+                    <span class="price">$5</span>
+                  </div>
+                  <p class="card-desc">
+                    Traditional black tea simmered with cloves and spices.
+                  </p>
+                </div>
+              </div>
+
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/ginger_tea.webp"
+                    alt="Ginger Tea"
+                    class="menu-thumb"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Ginger Tea</h3>
+                    <span class="price"> Reg $5 | Grande $6</span>
+                  </div>
+                  <p class="card-desc">Served Hot or Iced.</p>
+                </div>
+              </div>
+
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/turmeric_tea.webp"
+                    alt="Turmeric Tea"
+                    class="menu-thumb"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Turmeric Tea</h3>
+                    <span class="price"> Reg $5 | Grande $6</span>
+                  </div>
+                  <p class="card-desc">Served Hot or Iced.</p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/chamomile_tea.jpg"
+                    alt="Camomile Tea"
+                    class="menu-thumb"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Herbal Camomile Tea</h3>
+                    <span class="price"> Reg $5 | Grande $6</span>
+                  </div>
+                  <p class="card-desc">Served Hot or Iced.</p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/green_tea.webp"
+                    alt="Green Tea"
+                    class="menu-thumb"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Green Tea</h3>
+                    <span class="price"> Reg $5 | Grande $6</span>
+                  </div>
+                  <p class="card-desc">Served Hot or Iced.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <!-- END DRINKS PANEL -->
+        <!-- Ethiopian Food-->
+        <div
+          id="panel-ethiopian"
+          class="menu-panel"
+          style="display: none"
+          hidden
+        >
+          <section class="menu-section" id="et-tibs-sizzlers">
+            <h2 class="menu-section-title">Tibs / Sizzlers</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/tibs.jpg" alt="Mushroom Tibs" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Mushroom Tibs</h3>
+                    <span class="price">$6</span>
+                  </div>
+                  <p class="card-desc">
+                    Portabella mushrooms sauteed with onions, garlic, tomatoes,
+                    bell pepper and Ethiopian seasoning.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/ribeye.jpeg" alt="Ribeye Beef Steak" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Ribeye Beef Steak</h3>
+                    <span class="price">$15</span>
+                  </div>
+                  <p class="card-desc">
+                    Tender ribeye sauteed with onion, tomato, jalapeno and
+                    Ethiopian spices.
+                  </p>
+                </div>
+              </div>
+
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/lega.webp" alt="Lega Tibs" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Lega Tibs</h3>
+                    <span class="price">$15</span>
+                  </div>
+                  <p class="card-desc">
+                    Mildly seasoned tibs with fresh rosemary and sauteed
+                    vegetables.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/awaze.jpeg" alt="Awaze Wings" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Awaze Wings</h3>
+                    <span class="price">6 pc $8 | 12 pc $16 | 18 pc $24</span>
+                  </div>
+                  <p class="card-desc">
+                    Seasoned battered and deep fried chicken wings served with
+                    awaze sauce.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/awazetibs.jpeg" alt="Awaze Tibs" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Awaze Tibs</h3>
+                    <span class="price">$15</span>
+                  </div>
+                  <p class="card-desc">
+                    Sauteed tibs in house awaze sauce made with chili peppers.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/chilamb.jpeg" alt="Chicken / Lamb" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Chicken / Lamb</h3>
+                    <span class="price">Chicken $15 | Lamb $15 </span>
+                  </div>
+                  <p class="card-desc">
+                    Choose your protein sauteed with onions, tomatoes, peppers
+                    and Ethiopian herbs.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="et-specialties">
+            <h2 class="menu-section-title">House Specialties</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"> <img src="assets/Food-images/kifto.png" alt="Kitfo" /></div>
+            
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Kitfo</h3>
+                    <span class="price">$16</span>
+                  </div>
+                  <p class="card-desc">
+                    Grassfed prime filet mignon tartare, finely chopped with
+                    Ethiopian spiced butter and mitmita. Served rare, medium or
+                    raw.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/colardkifto.png" alt="Collard Green Kitfo" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Collard Green Kitfo</h3>
+                    <span class="price">$17</span>
+                  </div>
+                  <p class="card-desc">
+                    Traditional kitfo topped with seasoned collard greens.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="et-stews">
+            <h2 class="menu-section-title">Chicken / Lamb Stews</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/chickenstew.jpg" alt="Chicken Stew / Doro Wot" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Chicken Stew / Doro Wot</h3>
+                    <span class="price">$14</span>
+                  </div>
+                  <p class="card-desc">
+                    Ethiopian national dish simmered slowly in berbere sauce,
+                    served with egg and injera.
+                  </p>
+                </div>
+              </div>
+              
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/lambcollard.png" alt="Lamb + Collard Greens" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Lamb + Collard Greens</h3>
+                    <span class="price">$15</span>
+                  </div>
+                  <p class="card-desc">
+                    Cubed lamb mixed with fresh collard greens in a mild sauce.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="et-seafood">
+            <h2 class="menu-section-title">Seafood</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/fishtibs.png" alt="Fish / Asa Tibs" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Fish / Asa Tibs</h3>
+                    <span class="price">$14</span>
+                  </div>
+                  <p class="card-desc">
+                    Ethiopian-style fish served with potatoes and fresh lime.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/codtibs.png" alt="Cod Tibs" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Cod Tibs</h3>
+                    <span class="price">$15</span>
+                  </div>
+                  <p class="card-desc">
+                    Cod sauteed with onion, garlic, tomato and Ethiopian spices.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="et-combo">
+            <h2 class="menu-section-title">Ethiopian Combo</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/vegcombo.webp" alt="Vegetarian Combo" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Vegetarian Combo</h3>
+                    <span class="price">1 person $15 | 2 persons $30</span>
+                  </div>
+                  <p class="card-desc">
+                    Red lentils, yellow peas, collard greens and cabbage served
+                    with injera.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/stringbeans.jpg" alt="String Beans / Fasolia" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">String Beans / Fasolia</h3>
+                    <span class="price">$11</span>
+                  </div>
+                  <p class="card-desc">
+                    Fresh green beans and carrots in mild sauce.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img src="assets/Food-images/eggplantstew.jpg" alt="Eggplant &amp; Carrot Wot" />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Eggplant &amp; Carrot Wot</h3>
+                    <span class="price">$11</span>
+                  </div>
+                  <p class="card-desc">
+                    Eggplant and carrot simmered in tomato stew.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <!--DESSERTS-->
+
+        <div
+          id="panel-desserts"
+          class="menu-panel"
+          style="display: none"
+          hidden
+        >
+          <section class="menu-section" id="desserts">
+            <!-- <h2 class="menu-section-title">Desserts</h2> -->
+            <!-- <hr class="menu-section-divider" /> -->
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/tiramisu.avif"
+                    alt="Tiramisu"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Tiramisu</h3>
+                    <span class="price">$5</span>
+                  </div>
+                  <p class="card-desc">Classic Italian layered dessert.</p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/baklava.jpg"
+                    alt="Baklava"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Baklava</h3>
+                    <span class="price">$5</span>
+                  </div>
+                  <p class="card-desc">
+                    Sweet layered pastry dessert with honey.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/kulfi.avif"
+                    alt="Kulfi"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Kulfi</h3>
+                    <span class="price">$4</span>
+                  </div>
+                  <p class="card-desc">
+                    Indian style ice cream with nutty taste of pistachios and a
+                    touch of rose water.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/kheer.jpeg"
+                    alt="Kheer"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Kheer</h3>
+                    <span class="price">$4</span>
+                  </div>
+                  <p class="card-desc">
+                    Indian style rice pudding served cold with pistachio.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/bonbonerie.jpeg"
+                    alt="Bonbonerie Cakes"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Bonbonerie Cakes</h3>
+                    <span class="price">$7</span>
+                  </div>
+                  <p class="card-desc">
+                    Carrot cake, opera cream cake or seasonal cake.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/gulabjamun.avif"
+                    alt="Gulab Jamun"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Gulab Jamun</h3>
+                    <span class="price">$4</span>
+                  </div>
+                  <p class="card-desc">
+                    Two fried cheese balls soaked in honey syrup, served warm.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/fruitsalad.jpeg"
+                    alt="Fresh Fruit Salad"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Fresh Fruit Salad</h3>
+                    <span class="price">$5</span>
+                  </div>
+                  <p class="card-desc">A refreshing mix of seasonal fruits.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <script src="assets/js/script.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+
+    <script>
+      (function () {
+        /* ── 1. BLOCK scroll lock ─────────────────────────────── */
+        function unlock() {
+          document.documentElement.style.cssText +=
+            ";overflow-y:auto!important;height:auto!important;";
+          document.body.style.cssText +=
+            ";overflow-y:auto!important;height:auto!important;";
+        }
+        unlock();
+        document.addEventListener("DOMContentLoaded", unlock);
+        setTimeout(unlock, 300);
+        setTimeout(unlock, 1000);
+
+        /* ── 2. ELEMENTS ──────────────────────────────────────── */
+        var tabBtns = document.querySelectorAll(".menu-tab-btn");
+        var panelFood = document.getElementById("panel-food");
+        var panelBrunch = document.getElementById("panel-brunch");
+        var panelBar = document.getElementById("panel-bar");
+        var navFood = document.getElementById("cat-nav-food");
+        var navBrunch = document.getElementById("cat-nav-brunch");
+        var navBar = document.getElementById("cat-nav-bar");
+        var panelDrinks = document.getElementById("panel-drinks");
+        var panelEthiopian = document.getElementById("panel-ethiopian");
+        var panelDesserts = document.getElementById("panel-desserts");
+        var navDrinks = document.getElementById("cat-nav-drinks");
+        var navEthiopian = document.getElementById("cat-nav-ethiopian");
+        var navDesserts = document.getElementById("cat-nav-desserts");
+        var tabsEl = document.getElementById("menu-tabs-anchor");
+        var mainEl = document.querySelector(".menu-page-content");
+        var header = document.querySelector(".header");
+
+        var activePanel = "food";
+        var sectionObserver = null;
+        var PANEL_TOP_GAP = 24;
+
+        /* ── 3. CORE: position bars + push content ────────────── */
+        function positionBars() {
+          // getBoundingClientRect gives actual rendered size including CSS transitions
+          var headerH = header ? header.getBoundingClientRect().height : 0;
+
+          tabsEl.style.top = headerH + "px";
+          var tabsH = tabsEl.getBoundingClientRect().height;
+
+          var navTop = headerH + tabsH;
+          navFood.style.top = navTop + "px";
+          navBrunch.style.top = navTop + "px";
+          navBar.style.top = navTop + "px";
+          navDrinks.style.top = navTop + "px";
+          navEthiopian.style.top = navTop + "px";
+          navDesserts.style.top = navTop + "px";
+
+          var activeNav =
+            activePanel === "food"
+              ? navFood
+              : activePanel === "brunch"
+                ? navBrunch
+                : activePanel === "bar"
+                  ? navBar
+                  : activePanel === "drinks"
+                    ? navDrinks
+                    : activePanel === "ethiopian"
+                      ? navEthiopian
+                      : navDesserts;
+          var navH = activeNav.getBoundingClientRect().height;
+
+          var totalH = headerH + tabsH + navH;
+          var contentOffset = totalH + PANEL_TOP_GAP;
+
+          // Set CSS variable — main padding-top reads this
+          document.documentElement.style.setProperty(
+            "--menu-offset",
+            contentOffset + "px",
+          );
+
+          // Also directly set it in case CSS variable doesn't apply fast enough
+          if (mainEl) mainEl.style.setProperty("padding-top", contentOffset + "px", "important");
+
+          // scrollMarginTop for anchor links
+          document.querySelectorAll(".menu-section").forEach(function (s) {
+            s.style.scrollMarginTop = contentOffset + "px";
+          });
+        }
+
+        /* ── 4. OBSERVE HEADER — fires on CSS transition ─────── */
+        if (window.ResizeObserver) {
+          new ResizeObserver(function () {
+            positionBars();
+          }).observe(header);
+        }
+
+        // Also run on scroll as fallback (header class changes trigger height change)
+        window.addEventListener("scroll", positionBars, { passive: true });
+        window.addEventListener("resize", positionBars);
+        window.addEventListener("load", function () {
+          positionBars();
+          setTimeout(positionBars, 200);
+          setTimeout(positionBars, 600);
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+          positionBars();
+          setTimeout(positionBars, 100);
+          setTimeout(positionBars, 400);
+          setTimeout(positionBars, 800);
+        });
+
+        /* ── 5. TAB SWITCHING ─────────────────────────────────── */
+        function activateTab(tab) {
+          activePanel = tab;
+
+          tabBtns.forEach(function (b) {
+            b.classList.toggle("active", b.dataset.tab === tab);
+          });
+
+          var showFood = tab === "food";
+          var showBrunch = tab === "brunch";
+          var showBar = tab === "bar";
+          var showDrinks = tab === "drinks";
+          var showEthiopian = tab === "ethiopian";
+          var showDesserts = tab === "desserts";
+
+          panelFood.classList.toggle("is-active", showFood);
+          panelBrunch.classList.toggle("is-active", showBrunch);
+          panelBar.classList.toggle("is-active", showBar);
+          panelDrinks.classList.toggle("is-active", showDrinks);
+          panelEthiopian.classList.toggle("is-active", showEthiopian);
+          panelDesserts.classList.toggle("is-active", showDesserts);
+
+          panelFood.hidden = !showFood;
+          panelBrunch.hidden = !showBrunch;
+          panelBar.hidden = !showBar;
+          panelDrinks.hidden = !showDrinks;
+          panelEthiopian.hidden = !showEthiopian;
+          panelDesserts.hidden = !showDesserts;
+
+          panelFood.style.setProperty(
+            "display",
+            showFood ? "block" : "none",
+            "important",
+          );
+          panelBrunch.style.setProperty(
+            "display",
+            showBrunch ? "block" : "none",
+            "important",
+          );
+          panelBar.style.setProperty(
+            "display",
+            showBar ? "block" : "none",
+            "important",
+          );
+          panelDrinks.style.setProperty(
+            "display",
+            showDrinks ? "block" : "none",
+            "important",
+          );
+          panelEthiopian.style.setProperty(
+            "display",
+            showEthiopian ? "block" : "none",
+            "important",
+          );
+          panelDesserts.style.setProperty(
+            "display",
+            showDesserts ? "block" : "none",
+            "important",
+          );
+
+          [
+            panelFood,
+            panelBrunch,
+            panelBar,
+            panelDrinks,
+            panelEthiopian,
+            panelDesserts,
+          ].forEach(function (panel) {
+            var isActivePanel =
+              (panel === panelFood && showFood) ||
+              (panel === panelBrunch && showBrunch) ||
+              (panel === panelBar && showBar) ||
+              (panel === panelDrinks && showDrinks) ||
+              (panel === panelEthiopian && showEthiopian) ||
+              (panel === panelDesserts && showDesserts);
+
+            panel.querySelectorAll(".menu-section").forEach(function (section) {
+              section.style.setProperty(
+                "display",
+                isActivePanel ? "block" : "none",
+                "important",
+              );
+            });
+          });
+
+          navFood.classList.toggle("is-active", showFood);
+          navBrunch.classList.toggle("is-active", showBrunch);
+          navBar.classList.toggle("is-active", showBar);
+          navDrinks.classList.toggle("is-active", showDrinks);
+          navEthiopian.classList.toggle("is-active", showEthiopian);
+          navDesserts.classList.toggle("is-active", showDesserts);
+
+          var nav = showFood
+            ? navFood
+            : showBrunch
+              ? navBrunch
+              : showBar
+                ? navBar
+                : showDrinks
+                  ? navDrinks
+                  : showEthiopian
+                    ? navEthiopian
+                    : navDesserts;
+          nav.querySelectorAll("a").forEach(function (l) {
+            l.classList.remove("active");
+          });
+          var first = nav.querySelector("a");
+          if (first) first.classList.add("active");
+
+          positionBars();
+          bindSectionObserver();
+        }
+
+        function scrollToPanelStart() {
+          var activeNav =
+            activePanel === "food"
+              ? navFood
+              : activePanel === "brunch"
+                ? navBrunch
+                : activePanel === "bar"
+                  ? navBar
+                  : activePanel === "drinks"
+                    ? navDrinks
+                    : activePanel === "ethiopian"
+                      ? navEthiopian
+                      : navDesserts;
+
+          var activePanelEl =
+            activePanel === "food"
+              ? panelFood
+              : activePanel === "brunch"
+                ? panelBrunch
+                : activePanel === "bar"
+                  ? panelBar
+                  : activePanel === "drinks"
+                    ? panelDrinks
+                    : activePanel === "ethiopian"
+                      ? panelEthiopian
+                      : panelDesserts;
+
+          var firstSection = activePanelEl.querySelector(".menu-section");
+          if (!firstSection) return;
+
+          var headerH = header ? header.getBoundingClientRect().height : 0;
+          var tabsH = tabsEl.getBoundingClientRect().height;
+          var navH = activeNav.getBoundingClientRect().height;
+          var totalH = headerH + tabsH + navH + PANEL_TOP_GAP;
+
+          window.scrollTo({
+            top:
+              firstSection.getBoundingClientRect().top +
+              window.pageYOffset -
+              totalH,
+            behavior: "smooth",
+          });
+        }
+
+        tabBtns.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (btn.dataset.tab === activePanel) return;
+            activateTab(btn.dataset.tab);
+            scrollToPanelStart();
+          });
+        });
+
+        document
+          .querySelectorAll(".navbar-link[data-tab]")
+          .forEach(function (link) {
+            link.addEventListener("click", function (e) {
+              e.preventDefault();
+              var tab = link.dataset.tab;
+              if (!tab) return;
+              if (tab !== activePanel) {
+                activateTab(tab);
+              }
+              scrollToPanelStart();
+            });
+          });
+
+        /* ── 6. CATEGORY LINK CLICKS ──────────────────────────── */
+        document.addEventListener("click", function (e) {
+          var link = e.target.closest(".menu-cat-nav a");
+          if (!link) return;
+          e.preventDefault();
+
+          var targetId = link.getAttribute("href").replace("#", "");
+          var target = document.getElementById(targetId);
+          if (!target) return;
+
+          var headerH = header ? header.getBoundingClientRect().height : 0;
+          var tabsH = tabsEl.getBoundingClientRect().height;
+          var activeNav =
+            activePanel === "food"
+              ? navFood
+              : activePanel === "brunch"
+                ? navBrunch
+                : activePanel === "bar"
+                  ? navBar
+                  : activePanel === "drinks"
+                    ? navDrinks
+                    : activePanel === "ethiopian"
+                      ? navEthiopian
+                      : navDesserts;
+          var navH = activeNav.getBoundingClientRect().height;
+          var totalH = headerH + tabsH + navH;
+
+          window.scrollTo({
+            top:
+              target.getBoundingClientRect().top + window.pageYOffset - totalH,
+            behavior: "smooth",
+          });
+
+          activeNav.querySelectorAll("a").forEach(function (l) {
+            l.classList.remove("active");
+          });
+          link.classList.add("active");
+        });
+
+        function bindSectionObserver() {
+          if (sectionObserver) sectionObserver.disconnect();
+          sectionObserver = null;
+
+          var activeNav =
+            activePanel === "food"
+              ? navFood
+              : activePanel === "brunch"
+                ? navBrunch
+                : activePanel === "bar"
+                  ? navBar
+                  : activePanel === "drinks"
+                    ? navDrinks
+                    : activePanel === "ethiopian"
+                      ? navEthiopian
+                      : navDesserts;
+          var links = Array.from(activeNav.querySelectorAll("a"));
+          var sections = Array.from(
+            document.querySelectorAll(
+              activePanel === "food"
+                ? "#panel-food .menu-section"
+                : activePanel === "brunch"
+                  ? "#panel-brunch .menu-section"
+                  : activePanel === "bar"
+                    ? "#panel-bar .menu-section"
+                    : activePanel === "drinks"
+                      ? "#panel-drinks .menu-section"
+                      : activePanel === "ethiopian"
+                        ? "#panel-ethiopian .menu-section"
+                        : "#panel-desserts .menu-section",
+            ),
+          );
+
+          // Highlight first link by default
+          links.forEach(function (l) {
+            l.classList.remove("active");
+          });
+          if (links[0]) links[0].classList.add("active");
+
+          // Remove old scroll listener before adding new one
+          if (window._menuScrollHandler) {
+            window.removeEventListener("scroll", window._menuScrollHandler);
+          }
+
+          window._menuScrollHandler = function () {
+            var headerH =
+              header && !header.classList.contains("hide")
+                ? header.getBoundingClientRect().height
+                : 0;
+            var tabsH = tabsEl.getBoundingClientRect().height;
+            var navH = activeNav.getBoundingClientRect().height;
+            var totalH = headerH + tabsH + navH + PANEL_TOP_GAP + 10;
+
+            var current = sections[0];
+            sections.forEach(function (s) {
+              var top = s.getBoundingClientRect().top;
+              if (top <= totalH + 20) current = s;
+            });
+
+            links.forEach(function (l) {
+              l.classList.remove("active");
+            });
+            var activeLink = activeNav.querySelector(
+              'a[href="#' + current.id + '"]',
+            );
+            if (activeLink) {
+              activeLink.classList.add("active");
+              activeLink.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest",
+                inline: "center",
+              });
+            }
+          };
+
+          window.addEventListener("scroll", window._menuScrollHandler, {
+            passive: true,
+          });
+        }
+        /* ── 8. INIT ──────────────────────────────────────────── */
+        activateTab("food");
+      })();
+    </script>
+  </body>
+  <footer
+    class="footer section has-bg-image text-center"
+    style="background-image: url(&quot;./assets/images/footer-bg.jpg&quot;)"
+  >
+    <div class="container">
+      <div class="footer-top grid-list">
+        <div class="footer-brand has-before has-after">
+          <a href="#" class="logo">
+            <img
+              src="assets/images/logo.png"
+              width="220"
+              height="50"
+              loading="lazy"
+              alt="Elephant Walk home"
+            />
+          </a>
+
+          <address class="body-4">
+            170 W McMillan St, Cincinnati, OH 45219
+          </address>
+
+          <a href="mailto:booking@Elephant Walk.com" class="body-4 contact-link"
+            >booking@Elephant Walk.com</a
+          >
+
+          <a href="tel: (513) 526-1555" class="body-4 contact-link"
+            >Booking Request : (513) 526-1555</a
+          >
+
+          <p class="body-4">Mon - Fri : 09:00 am - 11:00 pm</p>
+
+          <p class="body-4">Sat - Sun : 09:00 am - 2:30 am</p>
+          <div class="wrapper">
+            <div class="separator"></div>
+            <div class="separator"></div>
+            <div class="separator"></div>
+          </div>
+        </div>
+
+        <ul class="footer-list">
+          <li>
+            <a href="#" class="label-2 footer-link hover-underline">Home</a>
+          </li>
+
+          <li>
+            <a href="./menu.html" class="label-2 footer-link hover-underline"
+              >Menu</a
+            >
+          </li>
+
+          <li>
+            <a href="#about" class="label-2 footer-link hover-underline"
+              >About Us</a
+            >
+          </li>
+
+          <li>
+            <a href="#reservation" class="label-2 footer-link hover-underline"
+              >Contact</a
+            >
+          </li>
+        </ul>
+
+        <ul class="footer-list">
+          <li>
+            <a
+              href="https://www.facebook.com/EWalkCincy/"
+              target="_blank"
+              class="label-2 footer-link hover-underline"
+              >Facebook</a
+            >
+          </li>
+
+          <li>
+            <a
+              href="https://www.instagram.com/elephantwalkcincy/"
+              target="_blank"
+              class="label-2 footer-link hover-underline"
+              >Instagram</a
+            >
+          </li>
+
+          <li>
+            <a
+              href="https://www.google.com/maps?gs_lcrp=EgZjaHJvbWUqFQgBEC4YJxivARjHARiABBiKBRiOBTIPCAAQIxgnGOMCGIAEGIoFMhUIARAuGCcYrwEYxwEYgAQYigUYjgUyBggCEEUYOzIKCAMQLhixAxiABDIGCAQQRRg5MgYIBRBFGDsyDwgGEC4YQxixAxiABBiKBTIGCAcQRRg80gEIMTc5OGowajeoAgCwAgA&um=1&ie=UTF-8&fb=1&gl=us&sa=X&geocode=KRWfBe70s0GIMWOtku4OsFei&daddr=170+W+McMillan+St,+Cincinnati,+OH+45219"
+              target="_blank"
+              class="label-2 footer-link hover-underline"
+              >Google Map</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">
+          &copy; 2026 Elephant Walk. All Rights Reserved | Powered by
+          <a href="https://vignixai.com/" target="_blank" class="link"
+            >Vignix</a
+          >
+        </p>
+      </div>
+    </div>
+  </footer>
+</html>

@@ -192,6 +192,32 @@ body.nav-active {
   overflow: hidden;
 }
 
+body.nav-active .header .btn,
+body.nav-active .nav-open-btn {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@media (max-width: 991px) {
+  .header .logo {
+    display: none;
+  }
+
+  .header .container {
+    justify-content: space-between;
+  }
+
+  .nav-open-btn {
+    order: -1;
+    padding-inline-start: 0;
+    padding-inline-end: 12px;
+  }
+
+  .header .btn {
+    order: 1;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 5px;
 }
@@ -672,8 +698,6 @@ body.nav-active {
   z-index: 4;
   border-block-end: 1px solid transparent;
   transition: var(--transition-1);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
 }
 
 .header.active {
@@ -745,6 +769,7 @@ body.nav-active {
 .navbar.active {
   visibility: visible;
   transform: translateX(360px);
+  z-index: 6;
 }
 
 .navbar .close-btn {
@@ -917,6 +942,7 @@ body.nav-active {
 .overlay.active {
   opacity: 1;
   pointer-events: all;
+  z-index: 5;
 }
 
 /*-----------------------------------*\

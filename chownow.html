@@ -6,92 +6,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Elephant Walk - Order Now</title>
     <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./assets/css/style.css" />
     <style>
-      body {
-        background: #070707;
-      }
-      .chownow-shell {
-        min-height: 100vh;
-        display: grid;
-        gap: 20px;
-        padding: 24px;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-      .chownow-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 16px;
-      }
-      .chownow-header h1 {
-        font-size: clamp(1.8rem, 3vw, 2.6rem);
-        color: #fff;
-        margin: 0;
-      }
-      .chownow-frame {
-        background: #111;
-        border-radius: 24px;
-        overflow: hidden;
-        min-height: 80vh;
-      }
-      .chownow-frame iframe {
-        width: 100%;
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      html, body {
         height: 100%;
-        min-height: 72vh;
-        border: 0;
+        background: #070707;
+        font-family: "DM Sans", sans-serif;
+        overflow: hidden;
       }
-      .btn-back {
+
+      .chownow-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 16px;
+        background: #111;
+        border-bottom: 1px solid rgba(201,168,76,0.25);
+        height: 50px;
+      }
+
+      .chownow-topbar .back-btn {
         display: inline-flex;
         align-items: center;
-        justify-content: center;
-        padding: 12px 22px;
-        border-radius: 999px;
-        border: 1px solid rgba(201, 168, 76, 0.6);
-        background: transparent;
-        color: #fff;
+        gap: 6px;
+        color: #c9a84c;
         text-decoration: none;
+        font-size: 1.4rem;
         font-weight: 700;
+        letter-spacing: 0.5px;
       }
-      .btn-back:hover {
-        background: rgba(201, 168, 76, 0.14);
+
+      .chownow-topbar .back-btn:hover {
+        color: #e0ba5c;
+      }
+
+      .chownow-topbar .title {
+        font-size: 1.5rem;
+        color: #fff;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .chownow-frame {
+        width: 100%;
+        height: calc(100vh - 50px);
+        border: none;
+        display: block;
       }
     </style>
   </head>
   <body>
-    <div class="chownow-shell">
-      <div class="chownow-header">
-        <div>
-          <h1>Order with ChowNow</h1>
-          <p style="color: #aaa; margin: 10px 0 0">
-            Your online ordering page will load below.
-          </p>
-        </div>
-        <a
-          href="#"
-          onclick="
-            history.back();
-            return false;
-          "
-          class="btn-back"
-          >Go Back</a
-        >
-      </div>
-      <div class="chownow-frame">
-        <iframe
-          id="chownow-iframe"
-          src="https://order.chownow.com/order/4290/locations"
-          title="ChowNow ordering"
-          allow="fullscreen; payment"
-        ></iframe>
-      </div>
+    <div class="chownow-topbar">
+      <a href="javascript:history.back()" class="back-btn">&#8592; Back</a>
+      <span class="title">Order Online</span>
+      <span style="width:60px"></span>
     </div>
+
+    <iframe
+      class="chownow-frame"
+      src="https://order.chownow.com/order/4290/locations"
+      title="ChowNow Online Ordering"
+      allow="fullscreen; payment; geolocation; camera; microphone"
+      allowpaymentrequest
+      allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+
+    <script>
+      // If ChowNow tries to open a new tab or navigate window.top,
+      // intercept and redirect the current page instead
+      var iframe = document.querySelector('.chownow-frame');
+      iframe.addEventListener('load', function () {
+        try {
+          var iframeWin = iframe.contentWindow;
+          var origOpen = iframeWin.open;
+          iframeWin.open = function (url) {
+            if (url) window.location.href = url;
+            return null;
+          };
+        } catch (e) {
+          // Cross-origin restriction — fallback: listen for message events
+        }
+      });
+
+      // Listen for postMessage from ChowNow to detect redirect requests
+      window.addEventListener('message', function (e) {
+        if (e.data && typeof e.data === 'string' && e.data.startsWith('http')) {
+          window.location.href = e.data;
+        }
+        if (e.data && e.data.url) {
+          window.location.href = e.data.url;
+        }
+      });
+    </script>
   </body>
 </html>

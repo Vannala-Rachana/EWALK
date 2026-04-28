@@ -7,22 +7,25 @@
     <title>Elephant Walk – Order Now</title>
     <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml" />
     <style>
-      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+      *, *::before, *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
       html, body {
         height: 100%;
         overflow: hidden;
         background: #0a0a0a;
-        font-family: "DM Sans", Arial, sans-serif;
+        font-family: Arial, sans-serif;
       }
 
-      /* ── Top bar ── */
       .topbar {
         position: fixed;
         top: 0; left: 0; right: 0;
         height: 48px;
         background: #111;
-        border-bottom: 1px solid rgba(201, 168, 76, 0.3);
+        border-bottom: 1px solid rgba(201, 168, 76, 0.35);
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -35,21 +38,20 @@
         align-items: center;
         gap: 6px;
         color: #c9a84c;
-        font-size: 1.4rem;
+        font-size: 14px;
         font-weight: 700;
         text-decoration: none;
         letter-spacing: 0.3px;
       }
 
       .topbar-title {
-        font-size: 1.4rem;
+        font-size: 14px;
         font-weight: 700;
         color: #fff;
         letter-spacing: 1.5px;
         text-transform: uppercase;
       }
 
-      /* ── iframe ── */
       .order-frame {
         position: fixed;
         top: 48px;
@@ -59,7 +61,6 @@
         width: 100%;
         height: calc(100% - 48px);
         border: none;
-        background: #fff;
       }
     </style>
   </head>
@@ -71,20 +72,11 @@
       <span style="width:60px"></span>
     </div>
 
-    <!--
-      sandbox notes:
-      - allow-same-origin + allow-scripts  → ChowNow JS runs normally
-      - allow-forms                         → payment / checkout forms work
-      - allow-top-navigation-by-user-activation → "Start Order" click navigates
-                                                   THIS tab instead of opening a new one
-      - NO allow-popups                     → blocks window.open / target=_blank
-    -->
     <iframe
       class="order-frame"
       src="https://order.chownow.com/order/4290/locations"
       title="ChowNow Online Ordering"
-      sandbox="allow-same-origin allow-scripts allow-forms allow-top-navigation-by-user-activation"
-      allow="payment; fullscreen; geolocation"
+      allow="payment; fullscreen; geolocation; camera; microphone"
       allowpaymentrequest
       allowfullscreen
     ></iframe>

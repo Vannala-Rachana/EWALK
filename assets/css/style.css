@@ -216,15 +216,9 @@ body.nav-active .nav-open-btn {
     height: auto;
   }
 
-  /* ORDER NOW in the middle */
+  /* Hide ORDER NOW in mobile header */
   .header .btn {
-    display: block !important;
-    order: 1;
-    margin-inline: auto;
-    padding: 8px 12px;
-    font-size: 1.1rem;
-    letter-spacing: 0.5px;
-    flex-shrink: 0;
+    display: none !important;
   }
 
   /* Hamburger on the right */
@@ -858,6 +852,21 @@ body.nav-active .nav-open-btn {
 /* Always show diamond & shift text for main nav items on mobile */
 .navbar-item:not(.navbar-subitem) > .navbar-link .separator {
   opacity: 1;
+}
+
+.navbar-order-item > .navbar-link .span {
+  color: var(--gold-crayola);
+  font-weight: 700;
+}
+
+.navbar-order-item > .navbar-link:is(:hover, :focus-visible) .span {
+  color: var(--white);
+}
+
+@media (min-width: 992px) {
+  .navbar-order-item {
+    display: none;
+  }
 }
 
 .navbar-item:not(.navbar-subitem) > .navbar-link .span {

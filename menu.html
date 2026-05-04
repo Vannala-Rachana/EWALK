@@ -26,7 +26,10 @@
         .header .btn {
           display: block !important;
           order: 1;
-          margin-inline-start: auto;
+          margin-inline: auto;
+          padding: 8px 12px;
+          font-size: 1.1rem;
+          letter-spacing: 0.5px;
         }
       }
 
@@ -3878,7 +3881,8 @@
           });
         }
         /* ── 8. INIT ──────────────────────────────────────────── */
-        activateTab("food");
+        var hashTab = window.location.hash.replace("#", "");
+        activateTab(hashTab || "food");
       })();
     </script>
   </body>

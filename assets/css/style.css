@@ -199,24 +199,39 @@ body.nav-active .nav-open-btn {
 }
 
 @media (max-width: 991px) {
-  .header .logo {
-    display: none;
-  }
-
   .header .container {
     justify-content: space-between;
+    gap: 6px;
   }
 
-  .nav-open-btn {
-    order: -1;
-    padding-inline-start: 0;
-    padding-inline-end: 12px;
+  /* Logo on the left, shrunk to fit */
+  .header .logo {
+    display: block;
+    order: 0;
+    flex-shrink: 0;
   }
 
+  .header .logo img {
+    width: 110px;
+    height: auto;
+  }
+
+  /* ORDER NOW in the middle */
   .header .btn {
     display: block !important;
     order: 1;
-    margin-inline-start: auto;
+    margin-inline: auto;
+    padding: 8px 12px;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+  }
+
+  /* Hamburger on the right */
+  .nav-open-btn {
+    order: 2;
+    padding-inline: 0;
+    flex-shrink: 0;
   }
 }
 

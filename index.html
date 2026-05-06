@@ -36,6 +36,15 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
     <style>
       /* ── Daily Offer Banner ── */
+      /* sits right below the fixed header; header is ~100px tall */
+      .daily-offer-banner {
+        margin-top: 100px;
+      }
+      @media (max-width: 991px) {
+        .daily-offer-banner {
+          margin-top: 80px;
+        }
+      }
       @keyframes shimmer {
         0%   { background-position: -400px 0; }
         100% { background-position: 400px 0; }
@@ -353,6 +362,22 @@
       </div>
     </header>
 
+    <!--
+    - #DAILY OFFER BANNER
+    -->
+    <section class="daily-offer-banner" id="daily-offer">
+      <div class="container">
+        <div class="offer-inner">
+          <div class="offer-badge">
+            <span class="offer-day-label">Today's Special</span>
+            <span class="offer-day-name" id="offer-day-name"></span>
+          </div>
+          <div class="offer-divider"></div>
+          <p class="offer-text" id="offer-text"></p>
+        </div>
+      </div>
+    </section>
+
     <main>
       <article>
         <!-- 
@@ -487,22 +512,6 @@
 
             <span class="label-2 text-center span">Book A Table</span>
           </a>
-        </section>
-
-        <!--
-        - #DAILY OFFER BANNER
-        -->
-        <section class="daily-offer-banner" id="daily-offer">
-          <div class="container">
-            <div class="offer-inner">
-              <div class="offer-badge">
-                <span class="offer-day-label">Today's Special</span>
-                <span class="offer-day-name" id="offer-day-name"></span>
-              </div>
-              <div class="offer-divider"></div>
-              <p class="offer-text" id="offer-text"></p>
-            </div>
-          </div>
         </section>
 
         <!-- 

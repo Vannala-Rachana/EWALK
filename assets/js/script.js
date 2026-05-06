@@ -50,9 +50,12 @@ if (navOpenBtn) navOpenBtn.addEventListener("click", openNavbar);
 if (closeBtn) closeBtn.addEventListener("click", closeNavbar);
 if (overlay) overlay.addEventListener("click", closeNavbar);
 
-// Close navbar when any sub-item link is clicked
+// Close navbar when any nav link is clicked (sub-items and main items)
 const navSubLinks = document.querySelectorAll(".navbar-subitem .navbar-link");
 addEventOnElements(navSubLinks, "click", closeNavbar);
+
+const navMainLinks = document.querySelectorAll(".navbar-item:not(.navbar-subitem) > .navbar-link");
+addEventOnElements(navMainLinks, "click", closeNavbar);
 
 /**
  * HEADER & BACK TOP BTN

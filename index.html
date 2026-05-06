@@ -36,137 +36,117 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
     <style>
       /* ── Daily Offer Banner ── */
-      /* sits right below the fixed header; header is ~100px tall */
-      .daily-offer-banner {
-        margin-top: 100px;
-      }
-      @media (max-width: 991px) {
-        .daily-offer-banner {
-          margin-top: 80px;
-        }
-      }
-      @keyframes shimmer {
-        0%   { background-position: -400px 0; }
-        100% { background-position: 400px 0; }
-      }
-      @keyframes pulse-border {
-        0%, 100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
-        50%       { box-shadow: 0 0 18px 4px rgba(201, 168, 76, 0.35); }
+      @keyframes offer-slide-down {
+        from { transform: translateY(-100%); opacity: 0; }
+        to   { transform: translateY(0);     opacity: 1; }
       }
 
       .daily-offer-banner {
-        background: linear-gradient(135deg, #120d00 0%, #2e1f00 40%, #3a2800 60%, #120d00 100%);
-        border-top: 3px solid #c9a84c;
-        border-bottom: 3px solid #c9a84c;
-        padding: 36px 0;
-        position: relative;
-        overflow: hidden;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10000;
+        background: linear-gradient(90deg, #1c0f00 0%, #3b2200 35%, #3b2200 65%, #1c0f00 100%);
+        border-bottom: 2px solid #c9a84c;
+        animation: offer-slide-down 0.5s ease forwards;
+        transition: transform 0.4s ease, opacity 0.4s ease;
       }
 
-      .daily-offer-banner::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: repeating-linear-gradient(
-          90deg,
-          transparent 0px,
-          transparent 80px,
-          rgba(201, 168, 76, 0.04) 80px,
-          rgba(201, 168, 76, 0.04) 81px
-        );
+      .daily-offer-banner.banner-hidden {
+        transform: translateY(-110%);
+        opacity: 0;
         pointer-events: none;
       }
 
       .offer-inner {
         display: flex;
         align-items: center;
-        gap: 32px;
-        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        padding: 10px 52px 10px 16px;
+        min-height: 46px;
         position: relative;
+        flex-wrap: wrap;
       }
 
-      .offer-badge {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        flex-shrink: 0;
-        background: linear-gradient(160deg, rgba(201,168,76,0.22) 0%, rgba(201,168,76,0.08) 100%);
-        border: 2px solid #c9a84c;
-        border-radius: 10px;
-        padding: 16px 28px;
-        min-width: 155px;
-        animation: pulse-border 3s ease-in-out infinite;
-      }
-
-      .offer-day-label {
+      .offer-tag {
         font-family: "DM Sans", sans-serif;
-        font-size: 0.75rem;
+        font-size: 0.68rem;
         font-weight: 700;
-        letter-spacing: 3px;
+        letter-spacing: 2px;
         text-transform: uppercase;
-        color: #c9a84c;
-        margin-bottom: 4px;
+        background: #c9a84c;
+        color: #1c0f00;
+        border-radius: 4px;
+        padding: 3px 10px;
+        white-space: nowrap;
+        flex-shrink: 0;
       }
 
       .offer-day-name {
         font-family: "Forum", serif;
-        font-size: 2.6rem;
+        font-size: 1.05rem;
         color: #f0d070;
-        line-height: 1.1;
-        text-shadow: 0 0 20px rgba(201, 168, 76, 0.6);
+        white-space: nowrap;
+        flex-shrink: 0;
       }
 
-      .offer-divider {
-        width: 3px;
-        height: 70px;
-        background: linear-gradient(to bottom, transparent, #c9a84c 30%, #f0d070 70%, transparent);
+      .offer-sep {
+        color: rgba(201, 168, 76, 0.45);
+        font-size: 1rem;
         flex-shrink: 0;
-        border-radius: 2px;
       }
 
       .offer-text {
         font-family: "DM Sans", sans-serif;
-        font-size: 1.6rem;
-        color: #f5ead8;
-        line-height: 1.75;
-        flex: 1;
-        text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+        font-size: 0.88rem;
+        color: #f0e6cc;
+        line-height: 1.45;
+        text-align: center;
       }
 
-      .offer-text strong {
-        color: #f0d070;
+      .offer-close {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border: 1px solid rgba(201, 168, 76, 0.5);
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #c9a84c;
+        font-size: 0.9rem;
+        line-height: 1;
+        transition: background 0.2s, color 0.2s, border-color 0.2s;
+        padding: 0;
+      }
+
+      .offer-close:hover {
+        background: #c9a84c;
+        color: #1c0f00;
+        border-color: #c9a84c;
       }
 
       @media (max-width: 768px) {
-        .daily-offer-banner {
-          padding: 28px 0;
-        }
-
         .offer-inner {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 16px;
+          padding: 8px 44px 8px 12px;
+          gap: 8px;
+          justify-content: flex-start;
         }
-
-        .offer-divider {
-          width: 70px;
-          height: 3px;
-          background: linear-gradient(to right, transparent, #c9a84c 30%, #f0d070 70%, transparent);
-        }
-
-        .offer-badge {
-          flex-direction: row;
-          gap: 12px;
-          align-items: center;
-          padding: 12px 20px;
-        }
-
-        .offer-day-name {
-          font-size: 2rem;
-        }
-
         .offer-text {
-          font-size: 1.4rem;
+          font-size: 0.8rem;
+          text-align: left;
+          flex: 1;
+          min-width: 0;
+        }
+        .offer-day-name {
+          font-size: 0.95rem;
         }
       }
     </style>
@@ -365,18 +345,15 @@
     <!--
     - #DAILY OFFER BANNER
     -->
-    <section class="daily-offer-banner" id="daily-offer">
-      <div class="container">
-        <div class="offer-inner">
-          <div class="offer-badge">
-            <span class="offer-day-label">Today's Special</span>
-            <span class="offer-day-name" id="offer-day-name"></span>
-          </div>
-          <div class="offer-divider"></div>
-          <p class="offer-text" id="offer-text"></p>
-        </div>
+    <div class="daily-offer-banner" id="daily-offer" role="banner" aria-label="Today's special offer">
+      <div class="offer-inner">
+        <span class="offer-tag">Today's Special</span>
+        <span class="offer-day-name" id="offer-day-name"></span>
+        <span class="offer-sep">—</span>
+        <p class="offer-text" id="offer-text"></p>
+        <button class="offer-close" id="offer-close-btn" aria-label="Close offer banner">&#x2715;</button>
       </div>
-    </section>
+    </div>
 
     <main>
       <article>
@@ -1175,6 +1152,29 @@
         var offer = offers[today];
         document.getElementById("offer-day-name").textContent = offer.day;
         document.getElementById("offer-text").textContent = offer.text;
+
+        var banner = document.getElementById("daily-offer");
+        var closeBtn = document.getElementById("offer-close-btn");
+        var header = document.querySelector(".header");
+
+        function applyBannerOffset() {
+          var h = banner.classList.contains("banner-hidden") ? 0 : banner.offsetHeight;
+          if (header) header.style.top = h + "px";
+        }
+
+        applyBannerOffset();
+        window.addEventListener("resize", applyBannerOffset);
+
+        closeBtn.addEventListener("click", function () {
+          banner.classList.add("banner-hidden");
+          if (header) header.style.top = "0px";
+          sessionStorage.setItem("offerBannerClosed", "1");
+        });
+
+        if (sessionStorage.getItem("offerBannerClosed") === "1") {
+          banner.classList.add("banner-hidden");
+          if (header) header.style.top = "0px";
+        }
       })();
     </script>
 

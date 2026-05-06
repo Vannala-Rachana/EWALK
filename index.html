@@ -44,7 +44,8 @@
         left: 0;
         right: 0;
         z-index: 10000;
-        background: #0e0e0e;
+        background: linear-gradient(90deg, #a67c00, #c9a84c, #e8c55a, #c9a84c, #a67c00);
+        box-shadow: 0 2px 12px rgba(201, 168, 76, 0.5);
         transition: transform 0.35s ease, opacity 0.35s ease;
       }
 
@@ -58,7 +59,7 @@
         align-items: center;
         justify-content: center;
         padding: 0 24px;
-        min-height: 52px;
+        min-height: 54px;
       }
 
       .offer-center {
@@ -70,27 +71,12 @@
         text-align: center;
       }
 
-      .offer-day-name {
+      .offer-text {
         font-family: "DM Sans", sans-serif;
         font-size: 1.15rem;
         font-weight: 900;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        color: #c9a84c;
-        white-space: nowrap;
-      }
-
-      .offer-sep {
-        color: rgba(255, 255, 255, 0.25);
-        font-size: 1.15rem;
-      }
-
-      .offer-text {
-        font-family: "DM Sans", sans-serif;
-        font-size: 1.1rem;
-        font-weight: 700;
-        letter-spacing: 0.8px;
-        color: #fff;
+        letter-spacing: 1.5px;
+        color: #1a0e00;
         text-transform: uppercase;
       }
 
@@ -101,11 +87,9 @@
 
         .offer-inner {
           padding: 10px 16px;
-          min-height: 56px;
+          min-height: 58px;
         }
-        .offer-center { gap: 8px; }
-        .offer-day-name { font-size: 0.95rem; letter-spacing: 2px; }
-        .offer-text { font-size: 0.9rem; letter-spacing: 0.3px; }
+        .offer-text { font-size: 0.92rem; letter-spacing: 0.5px; }
       }
     </style>
 

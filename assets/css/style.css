@@ -704,14 +704,14 @@ body.nav-active .nav-open-btn {
   left: 0;
   width: 100%;
   background-color: hsla(0, 0%, 7%, 0.85);
-  padding-block: 40px;
+  padding-block: 16px;
   z-index: 4;
   border-block-end: 1px solid transparent;
   transition: var(--transition-1);
 }
 
 .header.active {
-  padding-block: 20px;
+  padding-block: 12px;
   background-color: var(--eerie-black-4);
   border-color: var(--black-alpha-15);
 }
@@ -862,7 +862,43 @@ body.nav-active .nav-open-btn {
   color: var(--white);
 }
 
+/* Deals nav pill — gold outline only around the word */
+.navbar-deals-item > .navbar-link .span {
+  display: inline-block;
+  border: 1.5px solid var(--gold-crayola);
+  border-radius: 999px;
+  padding: 5px 14px;
+  color: var(--gold-crayola);
+  font-weight: 700;
+}
+
+.navbar-deals-item > .navbar-link:is(:hover, :focus-visible) .span {
+  background-color: var(--gold-crayola);
+  color: #1a0e00;
+}
+/* Back item — mobile only */
+.navbar-back-item > .navbar-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gold-crayola);
+}
+
+.navbar-back-item > .navbar-link ion-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.navbar-back-item > .navbar-link .span {
+  color: var(--gold-crayola);
+  font-weight: 700;
+}
+
 @media (min-width: 992px) {
+  .navbar-back-item {
+    display: none;
+  }
+
   .navbar-order-item {
     display: none;
   }
@@ -1470,6 +1506,60 @@ textarea.input-field {
 }
 
 /*-----------------------------------*\
+  #DEALS SECTION
+\*-----------------------------------*/
+
+.deals-section .section-title {
+  margin-block-end: 50px;
+}
+
+.deals-grid {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0;
+  margin: 0;
+  max-width: 800px;
+  margin-inline: auto;
+}
+
+.deal-card {
+  background-color: var(--eerie-black-4, #1a1a1a);
+  border: 1px solid var(--gold-crayola, #c9a84c);
+  border-radius: 8px;
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  text-align: left;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.deal-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 20px rgba(201, 168, 76, 0.2);
+}
+
+.deal-card-day {
+  color: var(--gold-crayola, #c9a84c);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  min-width: 175px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--gold-crayola, #c9a84c);
+  padding-right: 28px;
+}
+
+.deal-card-text {
+  color: #e0e0e0;
+  line-height: 1.7;
+  font-size: 1.5rem;
+}
+
+/*-----------------------------------*\
   #FEATURES
 \*-----------------------------------*/
 
@@ -1748,7 +1838,10 @@ textarea.input-field {
     top: 0;
     left: 0;
     width: 100%;
-    padding-block: 10px;
+    height: 42px;
+    padding-block: 0;
+    display: flex;
+    align-items: center;
     background-color: hsla(0, 0%, 5%, 0.95);
     border-block-end: 1px solid var(--white-alpha-20);
     z-index: 1009 !important;
@@ -2147,7 +2240,9 @@ textarea.input-field {
 
   .reservation-form {
     display: grid;
-    grid-template-columns: 1fr 0.5fr;
+    grid-template-columns: 1fr;
+    max-width: 560px;
+    margin-inline: auto;
   }
 
   /**
@@ -2220,24 +2315,48 @@ textarea.input-field {
     display: none;
   }
 
+  /* Clean 3-column layout: logo | nav | button */
   .header .container {
     max-width: unset;
+    padding-inline: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
   }
 
-  .navbar,
-  .navbar.active,
-  .navbar-list {
-    all: unset;
+  .header .logo {
+    flex: 0 0 150px;
+  }
+
+  .header .logo img {
+    width: 150px;
+    height: auto;
+    display: block;
   }
 
   .navbar,
   .navbar.active {
-    margin-inline: auto 20px;
+    all: unset;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    position: static;
+    visibility: visible;
+    transform: none;
+  }
+
+  .navbar-list {
+    all: unset;
   }
 
   .navbar-list {
     display: flex;
-    gap: 30px;
+    align-items: center;
+    gap: 40px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
   .navbar-item {
@@ -2262,8 +2381,13 @@ textarea.input-field {
   }
 
   .navbar-link {
-    font-weight: var(--weight-bold);
-    letter-spacing: var(--letterSpacing-1);
+    font-family: var(--fontFamily-dm_sans);
+    font-weight: 600;
+    font-size: 1.25rem;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    color: var(--white);
+    text-transform: uppercase;
   }
 
   .navbar-link::after {
@@ -2276,6 +2400,7 @@ textarea.input-field {
   }
 
   .header .btn {
+    flex: 0 0 auto;
     margin-inline-start: 0;
   }
 
@@ -2368,7 +2493,8 @@ textarea.input-field {
    */
 
   .navbar {
-    margin-inline: auto;
+    flex: 1;
+    justify-content: center;
   }
 
   /**

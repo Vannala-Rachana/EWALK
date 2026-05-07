@@ -16,20 +16,41 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
 
     <style>
-      .header {
-        top: 0px !important;
-        z-index: 1200 !important;
-        background-color: var(--eerie-black-4, #1a1a1a) !important;
+      /* ── Daily Offer Banner ── */
+      :root { --banner-h: 0px; --topbar-h: 42px; }
+
+      .daily-offer-banner {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 10000;
+        background: linear-gradient(90deg, #a67c00, #c9a84c, #e8c55a, #c9a84c, #a67c00);
+        box-shadow: 0 2px 12px rgba(201,168,76,0.5);
       }
 
-      @media (max-width: 991px) {
-        .header .btn {
-          display: none !important;
-        }
+      .offer-inner {
+        display: flex; align-items: center;
+        justify-content: center;
+        padding: 0 24px; min-height: 44px;
       }
 
-      .topbar {
-        z-index: 1201 !important;
+      .offer-text {
+        font-family: "DM Sans", sans-serif;
+        font-size: 1.1rem; font-weight: 900;
+        letter-spacing: 1.5px; color: #1a0e00;
+        text-transform: uppercase;
+      }
+
+      /* Push topbar & header down */
+      .topbar  { top: var(--banner-h) !important; z-index: 1201 !important; height: var(--topbar-h); display: flex; align-items: center; }
+      .header  { top: calc(var(--banner-h) + var(--topbar-h)) !important; z-index: 1200 !important; background-color: var(--eerie-black-4, #1a1a1a) !important; }
+
+      @media (max-width: 575px) {
+        :root { --topbar-h: 0px; }
+        .topbar  { display: none !important; }
+        .header  { top: var(--banner-h) !important; }
+        .header .btn { display: none !important; }
+        .offer-text { font-size: 0.9rem; letter-spacing: 0.5px; }
+        .offer-inner { min-height: 48px; padding: 10px 16px; }
       }
 
       html,
@@ -155,32 +176,33 @@
         object-fit: contain;
       }
 
-      .navbar-list .navbar-heading .navbar-link {
-        cursor: default;
+      /* Desktop: show Home, hide Menu dropdown */
+      @media (min-width: 1200px) {
+        .desktop-menu-link { display: none !important; }
+        .navbar-home-desktop { display: list-item; }
+      }
+
+      /* Mobile: hide desktop Home (mobile uses ← Home back item) */
+      @media (max-width: 1199px) {
+        .navbar-home-desktop { display: none !important; }
+      }
+
+      /* Back item — arrow + gold, no separator div needed */
+      .navbar-back-item > .navbar-link {
+        color: var(--gold-crayola, #c9a84c);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .navbar-back-item > .navbar-link ion-icon {
+        font-size: 1.3rem;
+        flex-shrink: 0;
+      }
+
+      .navbar-back-item > .navbar-link .span {
+        color: var(--gold-crayola, #c9a84c);
         font-weight: 700;
-        display: inline-flex;
-        align-items: center;
-      }
-
-      .navbar-list > .navbar-item:not(.navbar-subitem) .navbar-link {
-        display: inline-flex;
-        align-items: center;
-      }
-
-      .navbar-list > .navbar-item:not(.navbar-subitem) .navbar-link::before {
-        content: "◇";
-        color: #c9a84c;
-        margin-right: 10px;
-        display: inline-block;
-      }
-
-      .navbar-list .navbar-subitem .navbar-link .span {
-        padding-left: 16px;
-        display: inline-block;
-      }
-
-      .navbar-list .navbar-subitem .separator {
-        display: none;
       }
 
       .navbar-heading.active .navbar-link {
@@ -340,6 +362,16 @@
   </head>
 
   <body id="top">
+
+    <!-- DAILY OFFER BANNER -->
+    <div class="daily-offer-banner" id="daily-offer" role="banner" aria-label="Today's special deal">
+      <div class="offer-inner">
+        <div class="offer-center">
+          <span class="offer-text" id="offer-text"></span>
+        </div>
+      </div>
+    </div>
+
     <!-- TOPBAR -->
     <div class="topbar">
       <div class="container">
@@ -401,12 +433,19 @@
             <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
           </button>
           <ul class="navbar-list">
-            <li class="navbar-item">
+            <li class="navbar-item navbar-back-item">
               <a href="./index.html#home" class="navbar-link hover-underline">
+                <ion-icon name="arrow-back-outline" aria-hidden="true"></ion-icon>
+                <span class="span">Home</span>
+              </a>
+            </li>
+            <li class="navbar-item navbar-home-desktop">
+              <a href="./index.html" class="navbar-link hover-underline">
                 <div class="separator"></div>
                 <span class="span">Home</span>
               </a>
             </li>
+
             <li class="navbar-item desktop-menu-link">
               <a href="./menu.html" class="navbar-link hover-underline active">
                 <div class="separator"></div>
@@ -429,6 +468,11 @@
                   </a>
                 </li>
                 <li class="navbar-item navbar-subitem">
+                  <a href="#" class="navbar-link hover-underline" data-tab="desserts" data-nav-toggler>
+                    <span class="span">Desserts</span>
+                  </a>
+                </li>
+                <li class="navbar-item navbar-subitem">
                   <a href="#" class="navbar-link hover-underline" data-tab="bar" data-nav-toggler>
                     <span class="span">Bar Menu</span>
                   </a>
@@ -436,11 +480,6 @@
                 <li class="navbar-item navbar-subitem">
                   <a href="#" class="navbar-link hover-underline" data-tab="drinks" data-nav-toggler>
                     <span class="span">Drinks</span>
-                  </a>
-                </li>
-                <li class="navbar-item navbar-subitem">
-                  <a href="#" class="navbar-link hover-underline" data-tab="desserts" data-nav-toggler>
-                    <span class="span">Desserts</span>
                   </a>
                 </li>
               </ul>
@@ -461,6 +500,12 @@
               <a href="./index.html#reservation" class="navbar-link hover-underline">
                 <div class="separator"></div>
                 <span class="span">Contact</span>
+              </a>
+            </li>
+            <li class="navbar-item navbar-deals-item">
+              <a href="./index.html#deals" class="navbar-link hover-underline">
+                <div class="separator"></div>
+                <span class="span">Deals</span>
               </a>
             </li>
           </ul>
@@ -504,9 +549,9 @@
       <button class="menu-tab-btn" data-tab="brunch">
         🧇 Brunch Specialities
       </button>
+      <button class="menu-tab-btn" data-tab="desserts">🍰 Desserts</button>
       <button class="menu-tab-btn" data-tab="bar">🍹 Bar Menu</button>
       <button class="menu-tab-btn" data-tab="drinks">☕ Drinks</button>
-      <button class="menu-tab-btn" data-tab="desserts">🍰 Desserts</button>
     </div>
 
     <!-- FIXED CATEGORY NAV — FOOD -->
@@ -2690,6 +2735,106 @@
               <div class="menu-card">
                 <div class="menu-thumb-placeholder">
                   <img
+                    src="assets/Food-images/rose.jpeg"
+                    alt="Rose Refresher"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Rose Refresher</h3>
+                    <span class="price">$5</span>
+                  </div>
+                  <p class="card-desc">
+                    A delicate floral infusion served chilled over ice.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/iced-chai.jpg"
+                    alt="Iced Chai"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Iced Chai</h3>
+                    <span class="price">$6</span>
+                  </div>
+                  <p class="card-desc">
+                    Spiced black tea blended with milk and served cold.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/mangoshake.jpeg"
+                    alt="Mango Milkshake"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Mango Milkshake</h3>
+                    <span class="price">$6</span>
+                  </div>
+                  <p class="card-desc">Creamy mango flavored milkshake.</p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/salt-lassi.jpeg"
+                    alt="Spicy Salted Lassi"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Spicy Salted Lassi</h3>
+                    <span class="price">$5</span>
+                  </div>
+                  <p class="card-desc">
+                    Traditional yogurt-based drink with a savory, spicy kick.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/sweet-lassi.jpeg"
+                    alt="Sweet Lassi"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Sweet Lassi</h3>
+                    <span class="price">$5</span>
+                  </div>
+                  <p class="card-desc">
+                    Smooth and refreshing sweetened yogurt drink.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
+                    src="assets/Food-images/tealemonade.jpg"
+                    alt="Arnold Palmer"
+                  />
+                </div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Arnold Palmer</h3>
+                    <span class="price">$4</span>
+                  </div>
+                  <p class="card-desc">
+                    The classic refreshing mix of iced tea and lemonade.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder">
+                  <img
                     src="assets/Food-images/mangolemonade.webp"
                     alt="Mango Lemonade"
                   />
@@ -2703,7 +2848,9 @@
                     ></ion-icon>
                     <span class="price">$5</span>
                   </div>
-                  <p class="card-desc">Iced fresh squeezed mango lemonade.</p>
+                  <p class="card-desc">
+                    Zesty lemonade with a tropical mango twist.
+                  </p>
                 </div>
               </div>
               <div class="menu-card">
@@ -2723,7 +2870,7 @@
                     <span class="price">$5</span>
                   </div>
                   <p class="card-desc">
-                    Iced fresh squeezed strawberry lemonade.
+                    Lemonade with fresh strawberry puree.
                   </p>
                 </div>
               </div>
@@ -3468,6 +3615,28 @@
     </main>
 
     <script src="assets/js/script.js"></script>
+    <script>
+      (function () {
+        var dealsByDay = {
+          0: { text: "Enjoy your Sunday afternoon with Brunch & Mimosas available until 4PM. 📺 Direct TV Sunday Ticket ALL DAY!" },
+          1: { text: "Half Price on all Curry Dishes when you order a Plain Naan. 🍛 Dine In Only." },
+          2: { text: "Half Price on all Curry Dishes when you order a Plain Naan. 🍛 Dine In Only." },
+          3: { text: "🎓 Show your Student ID and receive a 10% discount on Chaat Corner Deals" },
+          4: { text: "🌯 $5 Naan Burritos & Naan Tacos — $6 Vegetarian Bowls." },
+          5: { text: "🍕 Experience our special Indian Style Flatbread Naan Pizza!" },
+          6: { text: "Enjoy your Saturday afternoon with Brunch & Mimosas available until 4PM. 🥂" }
+        };
+        var today = new Date().getDay();
+        document.getElementById("offer-text").textContent = dealsByDay[today].text;
+
+        var banner = document.getElementById("daily-offer");
+        function applyBannerOffset() {
+          document.documentElement.style.setProperty("--banner-h", banner.offsetHeight + "px");
+        }
+        applyBannerOffset();
+        window.addEventListener("resize", applyBannerOffset);
+      })();
+    </script>
     <script
       type="module"
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
@@ -3515,13 +3684,13 @@
 
         /* ── 3. CORE: position bars + push content ────────────── */
         function positionBars() {
-          // getBoundingClientRect gives actual rendered size including CSS transitions
-          var headerH = header ? header.getBoundingClientRect().height : 0;
+          // Use bottom of header (accounts for header top offset + height)
+          var headerBottom = header ? header.getBoundingClientRect().bottom : 0;
 
-          tabsEl.style.top = headerH + "px";
+          tabsEl.style.top = headerBottom + "px";
           var tabsH = tabsEl.getBoundingClientRect().height;
 
-          var navTop = headerH + tabsH;
+          var navTop = headerBottom + tabsH;
           navFood.style.top = navTop + "px";
           navBrunch.style.top = navTop + "px";
           navBar.style.top = navTop + "px";
@@ -3543,7 +3712,7 @@
                       : navDesserts;
           var navH = activeNav.getBoundingClientRect().height;
 
-          var totalH = headerH + tabsH + navH;
+          var totalH = headerBottom + tabsH + navH;
           var contentOffset = totalH + PANEL_TOP_GAP;
 
           // Set CSS variable — main padding-top reads this
@@ -3726,7 +3895,7 @@
           var firstSection = activePanelEl.querySelector(".menu-section");
           if (!firstSection) return;
 
-          var headerH = header ? header.getBoundingClientRect().height : 0;
+          var headerH = header ? header.getBoundingClientRect().bottom : 0;
           var tabsH = tabsEl.getBoundingClientRect().height;
           var navH = activeNav.getBoundingClientRect().height;
           var totalH = headerH + tabsH + navH + PANEL_TOP_GAP;
@@ -3772,7 +3941,7 @@
           var target = document.getElementById(targetId);
           if (!target) return;
 
-          var headerH = header ? header.getBoundingClientRect().height : 0;
+          var headerH = header ? header.getBoundingClientRect().bottom : 0;
           var tabsH = tabsEl.getBoundingClientRect().height;
           var activeNav =
             activePanel === "food"

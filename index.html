@@ -50,9 +50,21 @@
       }
 
       /* Push topbar & header down when banner is visible */
+      :root {
+        --topbar-h: 42px;
+        /* fixed header row height (logo + padding); used so #anchors clear the navbar */
+        --scroll-header-gap: 92px;
+      }
+
+      html {
+        scroll-padding-top: calc(
+          var(--banner-h) + var(--topbar-h) + var(--scroll-header-gap)
+        );
+      }
+
       .topbar  { top: var(--banner-h) !important; }
-      .header  { top: calc(var(--banner-h) + 9px) !important; }
-      .header.active { top: var(--banner-h) !important; }
+      .header  { top: calc(var(--banner-h) + var(--topbar-h)) !important; }
+      .header.active { top: calc(var(--banner-h) + var(--topbar-h)) !important; }
 
       .offer-inner {
         display: flex;
@@ -73,7 +85,7 @@
 
       .offer-text {
         font-family: "DM Sans", sans-serif;
-        font-size: 1.15rem;
+        font-size: 1.4rem;
         font-weight: 900;
         letter-spacing: 1.5px;
         color: #1a0e00;
@@ -81,7 +93,11 @@
       }
 
       @media (max-width: 991px) {
-        .topbar  { top: var(--banner-h) !important; }
+        :root {
+          --topbar-h: 0px;
+          --scroll-header-gap: 76px;
+        }
+        .topbar  { top: var(--banner-h) !important; display: none; }
         .header  { top: var(--banner-h) !important; }
         .header.active { top: var(--banner-h) !important; }
 
@@ -89,7 +105,7 @@
           padding: 10px 16px;
           min-height: 58px;
         }
-        .offer-text { font-size: 0.92rem; letter-spacing: 0.5px; }
+        .offer-text { font-size: 1.1rem; letter-spacing: 0.5px; }
       }
     </style>
 
@@ -177,10 +193,10 @@
           </button>
 
           <ul class="navbar-list">
-            <li class="navbar-item">
+            <li class="navbar-item navbar-back-item">
               <a href="#home" class="navbar-link hover-underline active">
-                <div class="separator"></div>
-                <span class="span">Home</span>
+                <ion-icon name="arrow-back-outline" aria-hidden="true"></ion-icon>
+                <span class="span">Back</span>
               </a>
             </li>
 
@@ -192,33 +208,33 @@
 
               <ul class="navbar-submenu">
                 <li class="navbar-item navbar-subitem">
-                  <a href="./menu.html" class="navbar-link hover-underline">
+                  <a href="./menu.html#food" class="navbar-link hover-underline">
                     <span class="span">Indian Food</span>
                   </a>
                 </li>
                 <li class="navbar-item navbar-subitem">
-                  <a href="./menu.html" class="navbar-link hover-underline">
+                  <a href="./menu.html#ethiopian" class="navbar-link hover-underline">
                     <span class="span">Ethiopian Food</span>
                   </a>
                 </li>
                 <li class="navbar-item navbar-subitem">
-                  <a href="./menu.html" class="navbar-link hover-underline">
+                  <a href="./menu.html#brunch" class="navbar-link hover-underline">
                     <span class="span">Brunch</span>
                   </a>
                 </li>
                 <li class="navbar-item navbar-subitem">
-                  <a href="./menu.html" class="navbar-link hover-underline">
+                  <a href="./menu.html#desserts" class="navbar-link hover-underline">
+                    <span class="span">Desserts</span>
+                  </a>
+                </li>
+                <li class="navbar-item navbar-subitem">
+                  <a href="./menu.html#bar" class="navbar-link hover-underline">
                     <span class="span">Bar Menu</span>
                   </a>
                 </li>
                 <li class="navbar-item navbar-subitem">
-                  <a href="./menu.html" class="navbar-link hover-underline">
+                  <a href="./menu.html#drinks" class="navbar-link hover-underline">
                     <span class="span">Drinks</span>
-                  </a>
-                </li>
-                <li class="navbar-item navbar-subitem">
-                  <a href="./menu.html" class="navbar-link hover-underline">
-                    <span class="span">Desserts</span>
                   </a>
                 </li>
               </ul>
@@ -242,6 +258,13 @@
               <a href="#reservation" class="navbar-link hover-underline">
                 <div class="separator"></div>
                 <span class="span">Contact</span>
+              </a>
+            </li>
+
+            <li class="navbar-item navbar-deals-item">
+              <a href="#deals" class="navbar-link hover-underline">
+                <div class="separator"></div>
+                <span class="span">Deals</span>
               </a>
             </li>
           </ul>
@@ -287,7 +310,7 @@
     <!--
     - #DAILY OFFER BANNER
     -->
-    <div class="daily-offer-banner" id="daily-offer" role="banner" aria-label="Today's special offer">
+    <div class="daily-offer-banner" id="daily-offer" role="banner" aria-label="Today's special deal">
       <div class="offer-inner">
         <div class="offer-center">
           <span class="offer-day-name" id="offer-day-name" style="display:none"></span>
@@ -697,120 +720,6 @@
         <section id="reservation" class="reservation">
           <div class="container">
             <div class="form reservation-form bg-black-10">
-              <form id="reservation-form" class="form-left">
-                <h2 class="headline-1 text-center">Online Reservation</h2>
-
-                <p class="form-text text-center">
-                  Booking request @
-                  <a href="tel: (513) 526-1555" class="link"> (513) 526-1555</a>
-                  or fill out the form
-                </p>
-
-                <div class="input-wrapper">
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Your Name"
-                    autocomplete="off"
-                    class="input-field"
-                  />
-
-                  <input
-                    type="tel"
-                    name="phone"
-                    placeholder="Phone Number"
-                    autocomplete="off"
-                    class="input-field"
-                  />
-                 
-  <input
-    type="email"
-    name="email"
-    placeholder="Your Email Address"
-    class="input-field"
-     autocomplete="off"
-    
-  />
-
-                </div>
-
-
-                <div class="input-wrapper">
-                  <div class="icon-wrapper">
-                    <ion-icon
-                      name="person-outline"
-                      aria-hidden="true"
-                    ></ion-icon>
-
-                    <select name="person" class="input-field">
-                      <option value="1-person">1 Person</option>
-                      <option value="2-person">2 Person</option>
-                      <option value="3-person">3 Person</option>
-                      <option value="4-person">4 Person</option>
-                      <option value="5-person">5 Person</option>
-                      <option value="6-person">6 Person</option>
-                      <option value="7-person">7 Person</option>
-                    </select>
-
-                    <ion-icon name="chevron-down" aria-hidden="true"></ion-icon>
-                  </div>
-
-                  <div class="icon-wrapper">
-                    <ion-icon
-                      name="calendar-clear-outline"
-                      aria-hidden="true"
-                    ></ion-icon>
-
-                    <input
-                      type="date"
-                      name="reservation-date"
-                      class="input-field"
-                    />
-
-                    <ion-icon name="chevron-down" aria-hidden="true"></ion-icon>
-                  </div>
-
-                  <div class="icon-wrapper">
-                    <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-
-                    <select name="time" class="input-field">
-                      <option value="08:00am">08 : 00 am</option>
-                      <option value="09:00am">09 : 00 am</option>
-                      <option value="010:00am">10 : 00 am</option>
-                      <option value="011:00am">11 : 00 am</option>
-                      <option value="012:00am">12 : 00 am</option>
-                      <option value="01:00pm">01 : 00 pm</option>
-                      <option value="02:00pm">02 : 00 pm</option>
-                      <option value="03:00pm">03 : 00 pm</option>
-                      <option value="04:00pm">04 : 00 pm</option>
-                      <option value="05:00pm">05 : 00 pm</option>
-                      <option value="06:00pm">06 : 00 pm</option>
-                      <option value="07:00pm">07 : 00 pm</option>
-                      <option value="08:00pm">08 : 00 pm</option>
-                      <option value="09:00pm">09 : 00 pm</option>
-                      <option value="10:00pm">10 : 00 pm</option>
-                    </select>
-
-                    <ion-icon name="chevron-down" aria-hidden="true"></ion-icon>
-                  </div>
-                </div>
-
-                <textarea
-                  name="message"
-                  placeholder="Message"
-                  autocomplete="off"
-                  class="input-field"
-                ></textarea>
-
-                <button type="submit" class="btn btn-secondary">
-                  <span class="text text-1">Book A Table</span>
-
-                  <span class="text text-2" aria-hidden="true"
-                    >Book A Table</span
-                  >
-                </button>
-              </form>
-
               <div
                 class="form-right text-center"
                 style="
@@ -848,6 +757,56 @@
                 </p>
               </div>
             </div>
+          </div>
+        </section>
+
+        <!--
+        - #DEALS
+      -->
+
+        <section id="deals" class="section deals-section text-center" aria-label="Weekly Deals">
+          <div class="container">
+            <p class="section-subtitle label-2">Every Day, A New Deal</p>
+            <h2 class="headline-1 section-title">Weekly Deals</h2>
+
+            <ul class="deals-grid">
+
+              <li class="deal-card">
+                <p class="deal-card-day label-2">Sunday</p>
+                <p class="deal-card-text body-4">Enjoy your Sunday afternoon with Brunch &amp; Mimosas available until 4PM. 📺 Direct TV Sunday Ticket ALL DAY!</p>
+              </li>
+
+              <li class="deal-card">
+                <p class="deal-card-day label-2">Monday</p>
+                <p class="deal-card-text body-4">Half Price on all Curry Dishes when you order a Plain Naan. 🍛 Dine In Only.</p>
+              </li>
+
+              <li class="deal-card">
+                <p class="deal-card-day label-2">Tuesday</p>
+                <p class="deal-card-text body-4">Half Price on all Curry Dishes when you order a Plain Naan. 🍛 Dine In Only.</p>
+              </li>
+
+              <li class="deal-card">
+                <p class="deal-card-day label-2">Wednesday</p>
+                <p class="deal-card-text body-4">🎓 Show your Student ID and receive a 10% discount on Chaat Corner Deals.</p>
+              </li>
+
+              <li class="deal-card">
+                <p class="deal-card-day label-2">Thursday</p>
+                <p class="deal-card-text body-4">🌯 $5 Naan Burritos &amp; Naan Tacos — $6 Vegetarian Bowls.</p>
+              </li>
+
+              <li class="deal-card">
+                <p class="deal-card-day label-2">Friday</p>
+                <p class="deal-card-text body-4">🍕 Experience our special Indian Style Flatbread Naan Pizza!</p>
+              </li>
+
+              <li class="deal-card">
+                <p class="deal-card-day label-2">Saturday</p>
+                <p class="deal-card-text body-4">Enjoy your Saturday afternoon with Brunch &amp; Mimosas available until 4PM. 🥂</p>
+              </li>
+
+            </ul>
           </div>
         </section>
 
@@ -1080,19 +1039,19 @@
   -->
     <script>
       (function () {
-        var offers = {
+        var dealsByDay = {
           0: { day: "Sunday",    text: "Enjoy your Sunday afternoon with Brunch & Mimosas available until 4PM. 📺 Direct TV Sunday Ticket ALL DAY!" },
           1: { day: "Monday",    text: "Half Price on all Curry Dishes when you order a Plain Naan. 🍛 Dine In Only." },
           2: { day: "Tuesday",   text: "Half Price on all Curry Dishes when you order a Plain Naan. 🍛 Dine In Only." },
-          3: { day: "Wednesday", text: "\"I'm Glad to Be a Student!\" 🎓 Show your Student ID and receive a 10% discount. Chaat Corner Deals — Street Foods of India: Tikki Chaat, Samosa Chaat, Dahi Gol Gappe, Bel Puri Chaat, Gol Gappe." },
-          4: { day: "Thursday",  text: "Throwback Thursday! 🌯 $5 Naan Burritos & Naan Tacos — $6 Vegetarian Bowls." },
-          5: { day: "Friday",    text: "Flavorful Friday! 🍕 Experience our special Indian Style Flatbread Naan Pizza!" },
+          3: { day: "Wednesday", text: "🎓 Show your Student ID and receive a 10% discount on Chaat Corner Deals " },
+          4: { day: "Thursday",  text: "🌯 $5 Naan Burritos & Naan Tacos — $6 Vegetarian Bowls." },
+          5: { day: "Friday",    text: "🍕 Experience our special Indian Style Flatbread Naan Pizza!" },
           6: { day: "Saturday",  text: "Enjoy your Saturday afternoon with Brunch & Mimosas available until 4PM. 🥂" }
         };
         var today = new Date().getDay();
-        var offer = offers[today];
-        document.getElementById("offer-day-name").textContent = offer.day;
-        document.getElementById("offer-text").textContent = offer.text;
+        var dealToday = dealsByDay[today];
+        document.getElementById("offer-day-name").textContent = dealToday.day;
+        document.getElementById("offer-text").textContent = dealToday.text;
 
         var banner = document.getElementById("daily-offer");
 
@@ -1106,46 +1065,6 @@
     </script>
 
     <script src="./assets/js/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script>
-      (function () {
-        emailjs.init({ publicKey: "YOUR_PUBLIC_KEY" });
-      })();
-
-      document.getElementById("reservation-form").addEventListener("submit", function (e) {
-        e.preventDefault();
-        var form = this;
-        var submitBtn = form.querySelector('[type="submit"]');
-        submitBtn.disabled = true;
-        submitBtn.querySelector(".text-1").textContent = "Sending...";
-
-        var params = {
-          name:    form.querySelector('[name="name"]').value,
-          phone:   form.querySelector('[name="phone"]').value,
-          email:   form.querySelector('[name="email"]').value,
-          person:  form.querySelector('[name="person"]').value,
-          date:    form.querySelector('[name="reservation-date"]').value,
-          time:    form.querySelector('[name="time"]').value,
-          message: form.querySelector('[name="message"]').value
-        };
-
-        emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", params)
-          .then(function () {
-            submitBtn.querySelector(".text-1").textContent = "Booking Sent!";
-            submitBtn.querySelector(".text-2").textContent = "Booking Sent!";
-            form.reset();
-            setTimeout(function () {
-              submitBtn.disabled = false;
-              submitBtn.querySelector(".text-1").textContent = "Book A Table";
-              submitBtn.querySelector(".text-2").textContent = "Book A Table";
-            }, 4000);
-          })
-          .catch(function () {
-            submitBtn.querySelector(".text-1").textContent = "Failed. Try again.";
-            submitBtn.disabled = false;
-          });
-      });
-    </script>
 
     <!-- 
     - ionicon link

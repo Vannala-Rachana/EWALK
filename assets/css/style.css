@@ -830,7 +830,7 @@ body.nav-active .nav-open-btn {
   transition: var(--transition-1);
 }
 
-.navbar-link:is(:hover, :focus-visible, .active) .span {
+.navbar-link:is(:hover, :focus-visible, .active) .span:not(.deals-ticket) {
   color: var(--gold-crayola);
   transform: translateX(20px);
 }
@@ -862,20 +862,99 @@ body.nav-active .nav-open-btn {
   color: var(--white);
 }
 
-/* Deals nav pill — gold outline only around the word */
-.navbar-deals-item > .navbar-link .span {
-  display: inline-block;
-  border: 1.5px solid var(--gold-crayola);
-  border-radius: 999px;
-  padding: 5px 14px;
-  color: var(--gold-crayola);
-  font-weight: 700;
+/* Deals nav — raffle ticket (SVG path mask + coupon-style inner frame) */
+.navbar-deals-item > .navbar-link .span.deals-ticket {
+  --deals-ticket-mask: url("../images/deals-ticket-mask.svg");
+  -webkit-mask-image: var(--deals-ticket-mask);
+  mask-image: var(--deals-ticket-mask);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-mode: alpha;
+  mask-mode: alpha;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.52em 1.65em 0.55em;
+  margin-block: 4px;
+  background: linear-gradient(
+    155deg,
+    hsl(43, 82%, 72%) 0%,
+    hsl(38, 74%, 54%) 38%,
+    hsl(30, 62%, 36%) 52%,
+    hsl(42, 72%, 58%) 100%
+  );
+  border: none;
+  border-radius: 0;
+  box-shadow:
+    inset 0 0 0 2px hsl(32, 58%, 26%),
+    inset 6px 5px 0 -4px rgba(255, 255, 255, 0.22),
+    inset -6px -6px 0 -4px rgba(0, 0, 0, 0.12),
+    inset 0 2px 6px rgba(255, 255, 255, 0.45),
+    inset 0 -4px 10px rgba(0, 0, 0, 0.22);
+  filter: drop-shadow(0 5px 14px rgba(0, 0, 0, 0.35))
+    drop-shadow(0 14px 36px rgba(0, 0, 0, 0.14));
+  transform: none;
+  transition: filter var(--transition-1), box-shadow var(--transition-1);
+  position: relative;
 }
 
-.navbar-deals-item > .navbar-link:is(:hover, :focus-visible) .span {
-  background-color: var(--gold-crayola);
-  color: #1a0e00;
+.navbar-deals-item > .navbar-link .deals-ticket::before {
+  content: "";
+  position: absolute;
+  left: 22%;
+  top: 14%;
+  bottom: 14%;
+  border-left: 2px dashed hsla(28, 50%, 18%, 0.48);
+  pointer-events: none;
 }
+
+.navbar-deals-item > .navbar-link .deals-ticket::after {
+  content: "";
+  position: absolute;
+  inset: 8px 11px 8px 24%;
+  border: 1px solid hsla(43, 45%, 22%, 0.38);
+  border-radius: 1px;
+  box-shadow: inset 0 0 0 1px hsla(48, 80%, 88%, 0.35);
+  pointer-events: none;
+}
+
+.navbar-deals-item > .navbar-link .deals-ticket-label {
+  position: relative;
+  z-index: 1;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  font-size: clamp(calc(0.95rem - 3px), calc(2.8vw - 3px), calc(1.15rem - 3px));
+  line-height: 1;
+  color: var(--white);
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.45),
+    0 0 1px rgba(0, 0, 0, 0.35);
+  transform: translate(7px, 2px);
+}
+
+.navbar-deals-item > .navbar-link:is(:hover, :focus-visible, .active) .span.deals-ticket {
+  transform: none;
+  filter: brightness(1.12) drop-shadow(0 12px 28px rgba(0, 0, 0, 0.42))
+    drop-shadow(0 26px 56px rgba(0, 0, 0, 0.22));
+  box-shadow:
+    inset 0 0 0 2px hsl(32, 58%, 28%),
+    inset 6px 5px 0 -4px rgba(255, 255, 255, 0.28),
+    inset -6px -6px 0 -4px rgba(0, 0, 0, 0.1),
+    inset 0 2px 6px rgba(255, 255, 255, 0.55),
+    inset 0 -4px 10px rgba(0, 0, 0, 0.18);
+}
+
+.navbar-deals-item > .navbar-link:is(:hover, :focus-visible, .active) .deals-ticket-label {
+  color: var(--white);
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.55),
+    0 0 1px rgba(0, 0, 0, 0.4);
+}
+
 /* Back item — mobile only */
 .navbar-back-item > .navbar-link {
   display: flex;
@@ -904,7 +983,7 @@ body.nav-active .nav-open-btn {
   }
 }
 
-.navbar-item:not(.navbar-subitem) > .navbar-link .span {
+.navbar-item:not(.navbar-subitem) > .navbar-link .span:not(.deals-ticket) {
   transform: translateX(20px);
 }
 
@@ -2397,6 +2476,16 @@ textarea.input-field {
   .navbar-link.active::after {
     transform: scaleX(1);
     opacity: 1;
+  }
+
+  .navbar-deals-item > .navbar-link .span.deals-ticket {
+    padding: 0.58em 1.65em 0.62em;
+    margin-block: 0;
+  }
+
+  .navbar-deals-item > .navbar-link .deals-ticket-label {
+    font-size: calc(1.42rem - 3px);
+    letter-spacing: 0.18em;
   }
 
   .header .btn {
